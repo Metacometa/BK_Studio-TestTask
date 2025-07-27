@@ -1,11 +1,10 @@
 ﻿public class Application
 {
-    private readonly ICommandHandler handler;
     private IScreen screen;
 
-    public Application(ICommandHandler handler, IScreen screen)
+    public Application(IScreen screen)
     {
-        this.handler = handler ?? throw new ArgumentNullException(nameof(handler));
+        //this.handler = handler ?? throw new ArgumentNullException(nameof(handler));
         this.screen = screen ?? throw new ArgumentNullException(nameof(screen));
     }
 

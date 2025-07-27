@@ -1,25 +1,16 @@
-﻿public class BaseScreen : IScreen
+﻿public abstract class BaseScreen : IScreen
 {
-    private readonly Dictionary<string, ICommand> commands;
+    protected readonly Dictionary<string, ICommand> commands;
 
-    private readonly IParser parser;
+    protected readonly IParser parser;
 
-    public BaseScreen(ICommandFactory commandFactory, IParser parser)
+    public BaseScreen(ICommandRegistry commandRegistry, IParser parser)
     {
-        commands = commandFactory.CreateCommands();
+        commands = commandRegistry.CreateCommands();
         this.parser = parser;
     }
 
-    public void Show()
-    {
-        Console.WriteLine("Base screen");
-    }
+    public abstract void Show();
 
-    public void HandleInput()
-    {
-        string? input = Console.ReadLine();
-        if (input == null) return;
-
-        var (command, args) = parser.ParseCommand(input!);
-    }
+    public abstract void HandleInput();
 }

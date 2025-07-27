@@ -17,21 +17,12 @@
     private static Application CreateApplication()
     {
         var parser = new TestParser();
-        var commands = CreateCommands();
 
-        var commandHandler = new CommandHandler(parser, commands);
-        var startScreen = new BaseScreen(new AuthorizationCommandFactory());
+        var commandFactory = new CommandFactory();
+        var authCommandRegistry = new AuthCommandRegistry(commandFactory);
 
-        return new Application(commandHandler, startScreen);
-    }
+        var startScreen = new AuthScreen(authCommandRegistry, parser);
 
-    private static Dictionary<string, ICommand> CreateCommands()
-    {
-        var commands = new Dictionary<string, ICommand>
-        {
-            ["test"] = new TestCommand()
-        };
-
-        return commands;
+        return new Application(startScreen);
     }
 }
