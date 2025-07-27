@@ -20,8 +20,9 @@
         var commands = CreateCommands();
 
         var commandHandler = new CommandHandler(parser, commands);
+        var startScreen = new BaseScreen(new AuthorizationCommandFactory());
 
-        return new Application(commandHandler);
+        return new Application(commandHandler, startScreen);
     }
 
     private static Dictionary<string, ICommand> CreateCommands()
