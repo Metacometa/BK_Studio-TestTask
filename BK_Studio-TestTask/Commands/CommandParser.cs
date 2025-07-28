@@ -5,16 +5,21 @@ public class CommandParser : IParser
     public (string command, string[] args) ParseCommand(string input)
     {
         string[] splittedInput = input.Split(' ');
+
+        if (splittedInput.Length == 0) return ("", []); 
+
         string command = splittedInput[0];
+        string[] args = new string[splittedInput.Length - 1];
 
-        Regex regex = new Regex("\".*\"");
-
-        string[] args = MatchRegexToStringArray(regex, input);
+        for (int i = 1; i < splittedInput.Length; i++)
+        {
+            args[i - 1] = splittedInput[i];
+        }
 
         return (command, args);
-        //throw new NotImplementedException();
     }
 
+    [Obsolete("На данный момент метод неактуален")]
     private string[] MatchRegexToStringArray(Regex regex, string input)
     {
         MatchCollection matches = regex.Matches(input);

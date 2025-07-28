@@ -1,5 +1,6 @@
 ﻿public interface IUserRepository
 {
-    public void AddUser();
-
+    public int Count { get; }
+    public void AddUser(User user);
+    public void GetUsers();
 }

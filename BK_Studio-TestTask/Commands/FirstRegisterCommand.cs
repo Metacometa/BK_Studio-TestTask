@@ -1,8 +1,8 @@
-﻿public class AuthCommand : ICommand
+﻿public class FirstRegisterCommand : ICommand
 {
     private readonly IAuthService authService;
 
-    public AuthCommand(IAuthService authService)
+    public FirstRegisterCommand(IAuthService authService)
     {
         this.authService = authService;
     }
@@ -14,6 +14,6 @@
             throw new IndexOutOfRangeException();
         }
 
-        authService.Login(args[0], args[1]);
+        authService.Register(args[0], args[1], Role.Manager);
     }
 }

@@ -4,9 +4,9 @@
 
     protected readonly IParser parser;
 
-    protected readonly IUserContext userContext;
+    protected readonly UserContext userContext;
 
-    public BaseScreen(IUserContext userContext, ICommandRegistry commandRegistry, IParser parser)
+    public BaseScreen(UserContext userContext, ICommandRegistry commandRegistry, IParser parser)
     {
         this.userContext = userContext;
         commands = commandRegistry.CreateCommands();

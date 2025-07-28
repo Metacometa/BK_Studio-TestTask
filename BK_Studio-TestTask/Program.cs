@@ -25,6 +25,6 @@
         var commandFactory = new CommandFactory(authService);
         var screenFactory = new ScreenFactory(userContext, parser, commandFactory);
 
-        return new Application(screenFactory);
+        return new Application(userContext, userRepository, screenFactory);
     }
 }

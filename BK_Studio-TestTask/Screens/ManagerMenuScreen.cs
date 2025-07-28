@@ -1,13 +1,20 @@
 ﻿public class ManagerMenuScreen : BaseScreen
 {
-    public ManagerMenuScreen(IUserContext userContext, 
+    public ManagerMenuScreen(UserContext userContext, 
         ICommandRegistry commandRegistry, 
-        IParser parser) : base(userContext, commandRegistry, parser) {}
+        IParser parser) : base(userContext, commandRegistry, parser) 
+    {
+        
+    }
 
     public override void Show()
     {
-        Console.Clear();
-        Console.WriteLine("Экран менеджера");
+        Console.WriteLine("=== Система управления проектом ===");
+
+        Console.WriteLine(userContext.Notification);
+
+        Console.WriteLine($"\nЗдравствуйте, {userContext.User.Login}!");
+        Console.WriteLine($"Ваша роль: {userContext.User.Role}");
     }
 
     public override void HandleInput()

@@ -5,6 +5,8 @@ public class UserRepository : IUserRepository
     private const string filePath = "users.json";
     private List<User> users;
 
+    public int Count => users.Count;
+
     public UserRepository()
     {
         users = File.Exists(filePath)
@@ -12,8 +14,17 @@ public class UserRepository : IUserRepository
             : new List<User>();
     }
 
-    public void AddUser()
+    public void AddUser(User user)
     {
+        users.Add(user);
         File.WriteAllText(filePath, JsonSerializer.Serialize(users));
+    }
+
+    public void GetUsers()
+    {
+        foreach (var user in users)
+        {
+            Console.WriteLine(user);
+        }
     }
 }

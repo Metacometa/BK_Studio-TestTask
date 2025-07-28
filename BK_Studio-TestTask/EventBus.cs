@@ -1,7 +1,8 @@
 ﻿public class EventBus
 {
     private static EventBus instance;
-    public static EventBus Instance { 
+    public static EventBus Instance
+    {
         get
         {
             if (instance == null)
@@ -11,10 +12,16 @@
         }
     }
 
-    public event Action? UserAuth;
-
-    public void TriggerUserAuth()
+    public event Action? authSuccessful;
+    public void TriggerAuthSuccessful()
     {
-        UserAuth?.Invoke();
+        authSuccessful?.Invoke();
+    }
+
+
+    public event Action? authFailed;
+    public void TriggerAuthFailed()
+    {
+        authFailed?.Invoke();
     }
 }

@@ -9,4 +9,5 @@
 
     public ICommand CreateTestCommand() => new TestCommand();
     public ICommand CreateAuthCommand() => new AuthCommand(authService);
+    public ICommand CreateFirstRegisterCommand() => new FirstRegisterCommand(authService);
 }

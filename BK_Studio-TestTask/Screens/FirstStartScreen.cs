@@ -1,10 +1,10 @@
-﻿public class AuthScreen : BaseScreen
+﻿public class FirstStartScreen : BaseScreen
 {
-    public AuthScreen(UserContext userContext, 
+    public FirstStartScreen(UserContext userContext, 
         ICommandRegistry commandRegistry, 
         IParser parser) : base(userContext, commandRegistry, parser) 
     {
-        userContext.Notification = "Добро пожаловать! Пожалуйста, авторизуйтесь:";
+        userContext.Notification = "Первый старт! Создайте нового управляющего:";
 
         //EventBus.Instance.authFailed += setErrorNotification;
     }
@@ -15,7 +15,7 @@
 
         Console.WriteLine(userContext.Notification);
 
-        Console.WriteLine("\nКоманда для входа: auth <логин> <пароль>");
+        Console.WriteLine("\nКоманда для создания управляющего: register <логин> <пароль>");
     }
 
     public override void HandleInput()
