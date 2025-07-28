@@ -6,7 +6,7 @@
     {
         var commands = new Dictionary<string, ICommand>
         {
-            ["auth"] = commandFactory.CreateTestCommand()
+            ["auth"] = commandFactory.CreateAuthCommand()
         };
 
         return commands;
