@@ -1,8 +1,11 @@
-﻿public class AuthScreen(ICommandRegistry commandRegistry, IParser parser) : BaseScreen(commandRegistry, parser)
+﻿public class AuthScreen : BaseScreen
 {
+    public AuthScreen(ICommandRegistry commandRegistry, IParser parser) : base(commandRegistry, parser) {}
+
     public override void Show()
     {
         Console.WriteLine("Auth screen");
+        Console.WriteLine($"Command: {commands.Count}");
     }
 
     public override void HandleInput()
