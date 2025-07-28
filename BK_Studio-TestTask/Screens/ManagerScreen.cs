@@ -9,7 +9,7 @@
 
     public override void Init()
     {
-        userContext.Notification = "Первый старт! Создайте нового управляющего:";
+        userContext.Notification = "Аутентификация прошла успешно";
     }
 
     public override void Show()
@@ -18,7 +18,7 @@
 
         Console.WriteLine(userContext.Notification);
 
-        Console.WriteLine($"\nЗдравствуйте, {userContext.User.Login}!");
+        Console.WriteLine($"\nЗдравствуйте, {userContext.User.Login}! Ваша роль: {userContext.User.Role}");
         Console.WriteLine($"Ваша роль: {userContext.User.Role}");
     }
 

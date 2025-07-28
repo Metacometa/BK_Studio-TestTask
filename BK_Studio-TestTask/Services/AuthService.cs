@@ -11,9 +11,12 @@
 
     public void Login(string username, string password)
     {
-        userRepository.AddUser(userContext.User);
-        Console.WriteLine("Login");
-        userRepository.GetUsers();
+        User user = userRepository.GetByUsername(username);
+
+        userContext.User = user;
+        //userRepository.AddUser(userContext.User);
+        //Console.WriteLine("Login");
+        //userRepository.GetUsers();
         EventBus.Instance.TriggerAuthSuccessful();
     }
     

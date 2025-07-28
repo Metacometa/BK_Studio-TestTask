@@ -30,9 +30,15 @@
 
     public IScreen Create(string key)
     {
-        IScreen screen = screens[key];
-        screen.Init();
-        return screen;
+        if (screens.TryGetValue(key, out IScreen result))
+        {
+            result.Init();
+            return result;
+        }
+        else
+        {
+            throw new KeyNotFoundException($"Ошибка программы: невозможно создать экран с ключом {key}");
+        }
     }
 
     public void Register(string name, IScreen screen)

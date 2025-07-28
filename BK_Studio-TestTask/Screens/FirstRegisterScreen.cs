@@ -4,9 +4,6 @@
         ICommandRegistry commandRegistry, 
         IParser parser) : base(userContext, commandRegistry, parser) 
     {
-        userContext.Notification = "Первый старт! Создайте нового управляющего:";
-
-        //EventBus.Instance.authFailed += setErrorNotification;
     }
 
     public override void Init()
@@ -23,7 +20,7 @@
         Console.WriteLine("\nКоманда для создания управляющего: register <логин> <пароль>");
     }
 
-    public override void HandleInput()
+/*    public override void HandleInput()
     {
         string? input = Console.ReadLine();
         if (input == null) return;
@@ -42,5 +39,5 @@
         {
             userContext.Notification = "Ошибка ввода: неправильное количество аргументов";
         }
-    }
+    }*/
 }

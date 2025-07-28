@@ -3,26 +3,39 @@
 public class UserRepository : IUserRepository
 {
     private const string filePath = "users.json";
-    private List<User> users;
+    private Dictionary<string, User> users;
 
     public int Count => users.Count;
 
     public UserRepository()
     {
         users = File.Exists(filePath)
-            ? JsonSerializer.Deserialize<List<User>>(File.ReadAllText(filePath)) ?? new List<User>()
-            : new List<User>();
+            ? JsonSerializer.Deserialize<Dictionary<string, User>>(File.ReadAllText(filePath))
+                ?? new Dictionary<string, User>()
+            : new Dictionary<string, User>();
     }
 
     public void AddUser(User user)
     {
-        users.Add(user);
+        if (users.ContainsKey(user.Login) == true)
+        {
+            throw new Exception("Ошибка ввода: этот логин уже занят");
+        }
+
+        users.Add(user.Login, user);
         File.WriteAllText(filePath, JsonSerializer.Serialize(users));
     }
 
     public User GetByUsername(string username)
     {
-        return null;
+        if (users.TryGetValue(username, out User result))
+        {
+            return result;
+        }
+        else
+        {
+            throw new KeyNotFoundException("Ошибка ввода: пользователь не найден");
+        }
     }
 
     public void GetUsers()

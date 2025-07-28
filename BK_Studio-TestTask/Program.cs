@@ -9,7 +9,7 @@
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Ошибка: {ex.Message}");
+            Console.WriteLine($"{ex.Message}");
             Environment.Exit(1);
         }
     }

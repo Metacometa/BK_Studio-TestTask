@@ -4,7 +4,6 @@
         ICommandRegistry commandRegistry, 
         IParser parser) : base(userContext, commandRegistry, parser) 
     {
-        userContext.Notification = "Добро пожаловать! Пожалуйста, авторизуйтесь:";
     }
 
     public override void Init()
@@ -21,7 +20,7 @@
         Console.WriteLine("\nКоманда для входа: auth <логин> <пароль>");
     }
 
-    public override void HandleInput()
+/*    public override void HandleInput()
     {
         string? input = Console.ReadLine();
         if (input == null) return;
@@ -30,17 +29,22 @@
 
         try
         {
-            commands[command].Execute(args);
+            if (commands.TryGetValue(command, out ICommand result))
+            {
+                result.Execute(args);
+            }
+            else
+            {
+                throw new KeyNotFoundException("Ошибка ввода: неверная команда");
+            }
         }
         catch (KeyNotFoundException ex)
         {
-            userContext.Notification = "Ошибка ввода: неверная команда";
+            userContext.Notification = ex.Message;
         }
         catch (IndexOutOfRangeException ex)
         {
             userContext.Notification = "Ошибка ввода: неправильное количество аргументов";
         }
-    }
-
-
+    }*/
 }
