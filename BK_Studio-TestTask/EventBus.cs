@@ -18,7 +18,6 @@
         authSuccessful?.Invoke();
     }
 
-
     public event Action? authFailed;
     public void TriggerAuthFailed()
     {

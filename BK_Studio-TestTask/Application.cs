@@ -16,8 +16,11 @@
         EventBus.Instance.authSuccessful += SetMenuScreen;
 
         screen = userRepository.Count == 0
-            ? screenFactory.CreateFirstStartScreen()
-            : screenFactory.CreateAuthScreen();
+            ? screenFactory.Create("register")
+            : screenFactory.Create("auth");
+        /*        screen = userRepository.Count == 0
+                    ? screenFactory.CreateFirstStartScreen()
+                    : screenFactory.CreateAuthScreen();*/
     }
 
     public void StartWorking()
@@ -34,7 +37,11 @@
     {
         try
         {
-            screen = screenFactory.CreateMenuScreen();
+            Role role = userContext.User.Role;
+            string key = role.ToString().ToLower();
+
+            screen = screenFactory.Create(key);
+            //screen = screenFactory.CreateMenuScreen();
         }
         catch (Exception ex)
         {

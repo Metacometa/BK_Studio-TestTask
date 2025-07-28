@@ -1,10 +1,15 @@
-﻿public class ManagerMenuScreen : BaseScreen
+﻿public class ManagerScreen : BaseScreen
 {
-    public ManagerMenuScreen(UserContext userContext, 
+    public ManagerScreen(UserContext userContext, 
         ICommandRegistry commandRegistry, 
         IParser parser) : base(userContext, commandRegistry, parser) 
     {
         
+    }
+
+    public override void Init()
+    {
+        userContext.Notification = "Первый старт! Создайте нового управляющего:";
     }
 
     public override void Show()

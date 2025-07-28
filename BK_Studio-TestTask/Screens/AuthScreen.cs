@@ -5,8 +5,11 @@
         IParser parser) : base(userContext, commandRegistry, parser) 
     {
         userContext.Notification = "Добро пожаловать! Пожалуйста, авторизуйтесь:";
+    }
 
-        //EventBus.Instance.authFailed += setErrorNotification;
+    public override void Init()
+    {
+        userContext.Notification = "Добро пожаловать! Пожалуйста, авторизуйтесь:";
     }
 
     public override void Show()
@@ -38,4 +41,6 @@
             userContext.Notification = "Ошибка ввода: неправильное количество аргументов";
         }
     }
+
+
 }

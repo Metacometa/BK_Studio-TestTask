@@ -13,6 +13,8 @@
         this.parser = parser;
     }
 
+    public abstract void Init();
+
     public abstract void Show();
 
     public abstract void HandleInput();

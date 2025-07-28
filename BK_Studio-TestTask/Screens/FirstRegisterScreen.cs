@@ -1,12 +1,17 @@
-﻿public class FirstStartScreen : BaseScreen
+﻿public class FirstRegisterScreen : BaseScreen
 {
-    public FirstStartScreen(UserContext userContext, 
+    public FirstRegisterScreen(UserContext userContext, 
         ICommandRegistry commandRegistry, 
         IParser parser) : base(userContext, commandRegistry, parser) 
     {
         userContext.Notification = "Первый старт! Создайте нового управляющего:";
 
         //EventBus.Instance.authFailed += setErrorNotification;
+    }
+
+    public override void Init()
+    {
+        userContext.Notification = "Первый старт! Создайте нового управляющего:";
     }
 
     public override void Show()

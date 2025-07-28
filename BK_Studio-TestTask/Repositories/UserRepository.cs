@@ -20,6 +20,11 @@ public class UserRepository : IUserRepository
         File.WriteAllText(filePath, JsonSerializer.Serialize(users));
     }
 
+    public User GetByUsername(string username)
+    {
+        return null;
+    }
+
     public void GetUsers()
     {
         foreach (var user in users)
