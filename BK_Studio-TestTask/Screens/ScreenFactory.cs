@@ -1,13 +1,13 @@
 ﻿public class ScreenFactory : IScreenFactory
 {
-    private readonly Dictionary<string, IScreen> screens;
+    private readonly Dictionary<ScreenType, IScreen> screens;
 
     public ScreenFactory()
     {
-        screens = new Dictionary<string, IScreen>();
+        screens = new Dictionary<ScreenType, IScreen>();
     }
 
-    public IScreen Create(string key)
+    public IScreen Create(ScreenType key)
     {
         if (screens.TryGetValue(key, out IScreen result))
         {
@@ -20,13 +20,26 @@
         }
     }
 
-    public void Register(string name, IScreen screen)
+    public IScreen CreateForRole(Role role)
     {
-        if (screens.ContainsKey(name))
+        switch (role)
         {
-            throw new InvalidOperationException($"Внутренняя ошибка: попытка переопределить экран \"{name}\"");
+            case Role.Employee:
+                return Create(ScreenType.EmployeeMenu);
+            case Role.Manager:
+                return Create(ScreenType.ManagerMenu);
+            default:
+                return null;
+        }
+    }
+
+    public void Register(ScreenType key, IScreen screen)
+    {
+        if (screens.ContainsKey(key))
+        {
+            throw new InvalidOperationException($"Внутренняя ошибка: попытка переопределить экран \"{key}\"");
         }
 
-        screens[name] = screen;
+        screens[key] = screen;
     }
 }

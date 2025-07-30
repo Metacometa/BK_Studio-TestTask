@@ -54,15 +54,15 @@
 
 
         //Register screens
-        screenFactory.Register("registerScreen", new FirstRegisterScreen(userContext,
+        screenFactory.Register(ScreenType.FirstRegister, new FirstRegisterScreen(userContext,
             firstStartRegistry,
             parser));
 
-        screenFactory.Register("authScreen", new AuthScreen(userContext,
+        screenFactory.Register(ScreenType.Auth, new AuthScreen(userContext,
             authRegistry,
             parser));
 
-        screenFactory.Register("managerScreen", new ManagerScreen(userContext,
+        screenFactory.Register(ScreenType.ManagerMenu, new ManagerScreen(userContext,
             menuRegistry,
             parser));
 

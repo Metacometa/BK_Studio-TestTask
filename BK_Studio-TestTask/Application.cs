@@ -17,8 +17,8 @@
         EventBus.Instance.logout += SetAuthScreen;
 
         screen = userRepository.Count == 0
-            ? screenFactory.Create("registerScreen")
-            : screenFactory.Create("authScreen");
+            ? screenFactory.Create(ScreenType.FirstRegister)
+            : screenFactory.Create(ScreenType.Auth);
     }
 
     public void StartWorking()
@@ -36,18 +36,7 @@
         try
         {
             Role role = userContext.User.Role;
-
-            switch (role)
-            {
-                case Role.Employee:
-                    screen = screenFactory.Create("emloyeeScreen");
-                    break;
-                case Role.Manager:
-                    screen = screenFactory.Create("managerScreen");
-                    break;
-                default:
-                    break;
-           }
+            screen = screenFactory.CreateForRole(role);
         }
         catch (Exception ex)
         {
@@ -58,6 +47,6 @@
 
     private void SetAuthScreen()
     {
-        screen = screenFactory.Create("authScreen");
+        screen = screenFactory.Create(ScreenType.Auth);
     }
 }

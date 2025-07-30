@@ -12,14 +12,14 @@
     public void Login(string username, string password)
     {
         User user = userRepository.GetByUsername(username);
-
-        userContext.User = user;
     
         if (user.Password != password)
         {
 
             throw new UnauthorizedAccessException("Ошибка ввода: неверный пароль");
         }
+
+        userContext.User = user;
 
         EventBus.Instance.TriggerAuthSuccessful();
     }
