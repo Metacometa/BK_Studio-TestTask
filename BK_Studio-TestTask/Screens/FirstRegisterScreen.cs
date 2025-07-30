@@ -6,7 +6,7 @@
     {
     }
 
-    public override void Init()
+    public override void SendStartMessage()
     {
         userContext.Notification = "Первый старт! Создайте нового управляющего:";
     }

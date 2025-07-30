@@ -23,7 +23,7 @@
         EventBus.Instance.newMessage += SetMessageNotificationColor;
     }
 
-    public abstract void Init();
+    public abstract void SendStartMessage();
     public abstract void Show();
     public virtual void HandleInput()
     {
@@ -36,6 +36,7 @@
         {
             ICommand command = commandRegistry.GetCommand(name, userContext.User.Role);
             command.Execute(args);
+            EventBus.Instance.TriggerNewMessage();
         }
         catch (Exception ex)
         {
@@ -44,10 +45,7 @@
         }
     }
 
-    protected virtual void WriteHeader(string input =
-        "╔══════════════════════════════════════╗\r\n" +
-        "║      СИСТЕМА УПРАВЛЕНИЯ ПРОЕКТОМ     ║\r\n" +
-        "╚══════════════════════════════════════╝")
+    protected virtual void WriteHeader()
     {
         Console.ForegroundColor = frameColor;
         Console.WriteLine("╔══════════════════════════════════════╗");

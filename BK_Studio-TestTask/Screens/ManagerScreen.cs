@@ -7,17 +7,17 @@
         
     }
 
-    public override void Init()
+    public override void SendStartMessage()
     {
-        userContext.Notification = $"\nЗдравствуйте, {userContext.User.Login}!" + 
+        userContext.Notification = $"Здравствуйте, {userContext.User.Login}!" + 
             $"\nВаша роль: {userContext.User.Role}";
     }
 
     public override void Show()
     {
-        Console.WriteLine("=== Система управления проектом ===");
-
-        Console.WriteLine(userContext.Notification);
+        WriteHeader();
+        Console.WriteLine();
+        WriteNotification(userContext.Notification);
 
         Console.WriteLine($"\nДоступные действия:");
         Console.WriteLine($"1. Зарегистрировать нового пользователя");

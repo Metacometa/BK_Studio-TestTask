@@ -11,7 +11,7 @@
     {
         if (screens.TryGetValue(key, out IScreen result))
         {
-            result.Init();
+            result.SendStartMessage();
             return result;
         }
         else

@@ -1,6 +1,6 @@
 ﻿public interface IScreen
 {
-    public void Init();
+    public void SendStartMessage();
     public void Show();
     public void HandleInput();
 }

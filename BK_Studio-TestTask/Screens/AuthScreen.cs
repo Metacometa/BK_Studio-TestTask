@@ -6,7 +6,7 @@
     {
     }
 
-    public override void Init()
+    public override void SendStartMessage()
     {
         userContext.Notification = "Добро пожаловать! \nДля работы требуется авторизация.";
     }
