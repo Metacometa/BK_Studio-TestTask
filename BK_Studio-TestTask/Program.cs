@@ -20,23 +20,22 @@
         var userRepository = new UserRepository();
 
         var authService = new AuthService(userContext, userRepository);
-        var parser = new CommandParser();
+        var parser = new Parser();
 
-        var commandFactory = new CommandFactory(authService);
+        var commandFactory = new CommandFactory(authService, parser);
         var screenFactory = new ScreenFactory(userContext, parser, commandFactory);
 
-        //перенести регистрацию из комманд фактори и и скрин фактори сюда
         try
         {
-            screenFactory.Register("auth", new AuthScreen(userContext,
+            screenFactory.Register("authScreen", new AuthScreen(userContext,
                 new AuthCommandRegistry(commandFactory),
                 parser));
 
-            screenFactory.Register("register", new FirstRegisterScreen(userContext,
-                new FirstRegisterCommandRegistry(commandFactory),
+            screenFactory.Register("registerScreen", new FirstRegisterScreen(userContext,
+                new RegisterCommandRegistry(commandFactory),
                 parser));
 
-            screenFactory.Register("manager", new ManagerScreen(userContext,
+            screenFactory.Register("managerScreen", new ManagerScreen(userContext,
                 new ManagerCommandRegistry(commandFactory),
                 parser));
         }

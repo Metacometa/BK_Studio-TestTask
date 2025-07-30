@@ -1,6 +1,6 @@
-﻿public class FirstRegisterCommandRegistry : BaseCommandRegistry
+﻿public class RegisterCommandRegistry : BaseCommandRegistry
 {
-    public FirstRegisterCommandRegistry(CommandFactory commandFactory) : base(commandFactory) {}
+    public RegisterCommandRegistry(CommandFactory commandFactory) : base(commandFactory) {}
 
     public override Dictionary<string, ICommand> CreateCommands()
     {

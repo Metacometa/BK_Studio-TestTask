@@ -18,8 +18,13 @@
 
         Console.WriteLine(userContext.Notification);
 
-        Console.WriteLine($"\nЗдравствуйте, {userContext.User.Login}! Ваша роль: {userContext.User.Role}");
+        Console.WriteLine($"\nЗдравствуйте, {userContext.User.Login}!");
         Console.WriteLine($"Ваша роль: {userContext.User.Role}");
+
+        Console.WriteLine($"\nДоступные вам действия:");
+        Console.WriteLine($"1. Зарегистрировать нового пользователя");
+        Console.WriteLine($"Команда: register");
+        Console.WriteLine($"2. Создать новую задачу:");
     }
 
     public override void HandleInput()

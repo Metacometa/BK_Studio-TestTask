@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-public class CommandParser : IParser
+public class Parser : IParser
 {
     public (string command, string[] args) ParseCommand(string input)
     {
@@ -17,6 +17,22 @@ public class CommandParser : IParser
         }
 
         return (command, args);
+    }
+
+    public bool TryParseRole(string input, out Role role)
+    {
+        switch (input)
+        {
+            case "Manager":
+                role = Role.Manager;
+                return true;
+            case "Emloyee":
+                role = Role.Employee;
+                return true;
+            default:
+                role = Role.Unathorized;
+                return false;
+        }
     }
 
     [Obsolete("На данный момент метод неактуален")]

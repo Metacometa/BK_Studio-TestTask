@@ -14,9 +14,12 @@
         User user = userRepository.GetByUsername(username);
 
         userContext.User = user;
-        //userRepository.AddUser(userContext.User);
-        //Console.WriteLine("Login");
-        //userRepository.GetUsers();
+    
+        if (user.Password != password)
+        {
+            throw new UnauthorizedAccessException("Ошибка ввода: неверный пароль");
+        }
+
         EventBus.Instance.TriggerAuthSuccessful();
     }
     

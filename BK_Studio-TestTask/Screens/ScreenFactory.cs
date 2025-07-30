@@ -19,13 +19,13 @@
         this.parser = parser;
 
         this.commandFactory = commandFactory;
-
+/*
         menuScreens = new Dictionary<Role, IScreen>()
         {
             [Role.Manager] = new ManagerScreen(userContext,
                 new ManagerCommandRegistry(commandFactory),
                 parser)
-        };
+        };*/
     }
 
     public IScreen Create(string key)
@@ -59,11 +59,4 @@
             new FirstRegisterCommandRegistry(commandFactory),
             parser);
     }*/
-
-    public IScreen CreateMenuScreen()
-    {
-        var role = userContext.User.Role;
-        return menuScreens[role];
-    }
-
 }

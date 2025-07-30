@@ -35,13 +35,9 @@
                 throw new KeyNotFoundException("Ошибка ввода: неверная команда");
             }
         }
-        catch (KeyNotFoundException ex)
+        catch (Exception ex)
         {
             userContext.Notification = ex.Message;
-        }
-        catch (IndexOutOfRangeException ex)
-        {
-            userContext.Notification = "Ошибка ввода: неправильное количество аргументов";
         }
     }
 }

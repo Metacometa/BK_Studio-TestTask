@@ -9,11 +9,11 @@
 
     public void Execute(string[] args)
     {
-        if (args.Length != 3)
+        if (args.Length != 2)
         {
-            throw new IndexOutOfRangeException();
+            throw new IndexOutOfRangeException("Ошибка ввода: неправильное количество аргументов");
         }
 
-        //authService.Register(args[0], args[1], Role.Manager);
+        authService.Register(args[0], args[1], Role.Manager);
     }
 }

@@ -1,6 +1,6 @@
-﻿public class AuthCommandRegistry : BaseCommandRegistry
+﻿public class CommandRegistry : BaseCommandRegistry
 {
-    public AuthCommandRegistry(CommandFactory commandFactory) : base(commandFactory) {}
+    public CommandRegistry(CommandFactory commandFactory) : base(commandFactory) {}
 
     public override Dictionary<string, ICommand> CreateCommands()
     {
