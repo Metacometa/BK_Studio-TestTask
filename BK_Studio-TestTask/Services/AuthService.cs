@@ -17,20 +17,31 @@
     
         if (user.Password != password)
         {
+
             throw new UnauthorizedAccessException("Ошибка ввода: неверный пароль");
         }
 
         EventBus.Instance.TriggerAuthSuccessful();
     }
-    
-    public void Register(string username, string password, Role role)
+
+    public void Logout()
+    {
+        userContext.User = new User();
+        EventBus.Instance.TriggerLogout();
+    }
+
+    public User CreateUser(string username, string password, Role role)
     {
         User user = new User(username, password, role);
-        Console.WriteLine(user);
-
         userRepository.AddUser(user);
-        userContext.User = user;
 
+        userContext.Notification = $"Пользователь \"{username}\" с ролью \"{role}\" был создан";
+        return user;
+    }
+
+    public void SetCurrentUser(User user)
+    {
+        userContext.User = user;
         EventBus.Instance.TriggerAuthSuccessful();
     }
 }

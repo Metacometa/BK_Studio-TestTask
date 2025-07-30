@@ -16,4 +16,11 @@ public class User
         Password = password;
         Role = role;
     }
+
+    public User()
+    {
+        Login = string.Empty;
+        Password = string.Empty;
+        Role = Role.Unathorized;
+    }
 }

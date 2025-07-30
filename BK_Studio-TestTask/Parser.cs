@@ -26,7 +26,7 @@ public class Parser : IParser
             case "Manager":
                 role = Role.Manager;
                 return true;
-            case "Emloyee":
+            case "Employee":
                 role = Role.Employee;
                 return true;
             default:

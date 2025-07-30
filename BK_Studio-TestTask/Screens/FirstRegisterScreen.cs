@@ -19,25 +19,4 @@
 
         Console.WriteLine("\nКоманда для создания управляющего: register <логин> <пароль>");
     }
-
-/*    public override void HandleInput()
-    {
-        string? input = Console.ReadLine();
-        if (input == null) return;
-
-        var (command, args) = parser.ParseCommand(input!);
-
-        try
-        {
-            commands[command].Execute(args);
-        }
-        catch (KeyNotFoundException ex)
-        {
-            userContext.Notification = "Ошибка ввода: неверная команда";
-        }
-        catch (IndexOutOfRangeException ex)
-        {
-            userContext.Notification = "Ошибка ввода: неправильное количество аргументов";
-        }
-    }*/
 }

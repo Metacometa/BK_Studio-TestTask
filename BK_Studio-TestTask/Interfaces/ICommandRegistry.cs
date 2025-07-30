@@ -1,4 +1,5 @@
 ﻿public interface ICommandRegistry
 {
-    public Dictionary<string, ICommand> CreateCommands();
+    public void Register(string name, Role[] roles, ICommand command);
+    public ICommand GetCommand(string name, Role role);
 }

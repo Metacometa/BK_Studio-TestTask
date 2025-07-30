@@ -23,28 +23,49 @@
         var parser = new Parser();
 
         var commandFactory = new CommandFactory(authService, parser);
-        var screenFactory = new ScreenFactory(userContext, parser, commandFactory);
+        var screenFactory = new ScreenFactory();
 
-        try
-        {
-            screenFactory.Register("authScreen", new AuthScreen(userContext,
-                new AuthCommandRegistry(commandFactory),
-                parser));
+        var firstStartRegistry = new CommandRegistry();
+        var authRegistry = new CommandRegistry();
+        var menuRegistry = new CommandRegistry();
 
-            screenFactory.Register("registerScreen", new FirstRegisterScreen(userContext,
-                new RegisterCommandRegistry(commandFactory),
-                parser));
+        //Register first start commands
+        firstStartRegistry.Register("register",
+            [Role.Unathorized],
+            commandFactory.RegisterCommand());
 
-            screenFactory.Register("managerScreen", new ManagerScreen(userContext,
-                new ManagerCommandRegistry(commandFactory),
-                parser));
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Внутренняя ошибка: {ex.Message}");
+        //Register auth commands
+        authRegistry.Register("auth",
+            [Role.Unathorized],
+            commandFactory.AuthCommand());
 
-            Environment.Exit(1);
-        }
+        //Register menu commands
+        menuRegistry.Register("create-user",
+            [Role.Manager],
+            commandFactory.CreateUserCommand());
+
+        menuRegistry.Register("change-status",
+            [Role.Employee],
+            commandFactory.ChangeStatusCommand());
+
+        menuRegistry.Register("logout",
+            [Role.Employee, Role.Manager],
+            commandFactory.LogoutCommand());
+
+
+        //Register screens
+        screenFactory.Register("registerScreen", new FirstRegisterScreen(userContext,
+            firstStartRegistry,
+            parser));
+
+        screenFactory.Register("authScreen", new AuthScreen(userContext,
+            authRegistry,
+            parser));
+
+        screenFactory.Register("managerScreen", new ManagerScreen(userContext,
+            menuRegistry,
+            parser));
+
 
 
 /*        screenFactory.Register("employee", new FirstRegisterScreen(userContext,

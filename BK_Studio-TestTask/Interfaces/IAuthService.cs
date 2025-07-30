@@ -1,8 +1,7 @@
 ﻿public interface IAuthService
 {
     public void Login(string user, string password);
-    public void Register(string username, string password, Role role)
-    {
-
-    }
+    public User CreateUser(string username, string password, Role role);
+    public void SetCurrentUser(User user);
+    public void Logout();
 }

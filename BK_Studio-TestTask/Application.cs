@@ -14,6 +14,7 @@
         this.userRepository = userRepository;
 
         EventBus.Instance.authSuccessful += SetMenuScreen;
+        EventBus.Instance.logout += SetAuthScreen;
 
         screen = userRepository.Count == 0
             ? screenFactory.Create("registerScreen")
@@ -24,13 +25,13 @@
     {
         while (true)
         {
-            //Console.Clear();
+            Console.Clear();
             screen.Show();
             screen.HandleInput();
         }
     }
 
-    public void SetMenuScreen()
+    private void SetMenuScreen()
     {
         try
         {
@@ -47,14 +48,16 @@
                 default:
                     break;
            }
-/*
-            string key = role.ToString().ToLower();
-
-            screen = screenFactory.Create(key);*/
         }
         catch (Exception ex)
         {
+            EventBus.Instance.TriggerError();
             userContext.Notification = $"Внутренняя ошибка: {ex.Message}";
         }
+    }
+
+    private void SetAuthScreen()
+    {
+        screen = screenFactory.Create("authScreen");
     }
 }

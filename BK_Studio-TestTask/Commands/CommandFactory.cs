@@ -9,8 +9,9 @@
         this.parser = parser;
     }
 
-    public ICommand TestCommand() => new TestCommand();
+    public ICommand LogoutCommand() => new LogoutCommand(authService);
     public ICommand AuthCommand() => new AuthCommand(authService);
     public ICommand RegisterCommand() => new RegisterCommand(authService);
     public ICommand CreateUserCommand() => new CreateUserCommand(authService, parser);
+    public ICommand ChangeStatusCommand() => new ChangeStatusCommand(authService, parser);
 }

@@ -14,6 +14,7 @@
             throw new IndexOutOfRangeException("Ошибка ввода: неправильное количество аргументов");
         }
 
-        authService.Register(args[0], args[1], Role.Manager);
+        User user = authService.CreateUser(args[0], args[1], Role.Manager);
+        authService.SetCurrentUser(user);
     }
 }

@@ -9,7 +9,8 @@
 
     public override void Init()
     {
-        userContext.Notification = "Аутентификация прошла успешно";
+        userContext.Notification = $"\nЗдравствуйте, {userContext.User.Login}!" + 
+            $"\nВаша роль: {userContext.User.Role}";
     }
 
     public override void Show()
@@ -18,22 +19,30 @@
 
         Console.WriteLine(userContext.Notification);
 
-        Console.WriteLine($"\nЗдравствуйте, {userContext.User.Login}!");
-        Console.WriteLine($"Ваша роль: {userContext.User.Role}");
-
-        Console.WriteLine($"\nДоступные вам действия:");
+        Console.WriteLine($"\nДоступные действия:");
         Console.WriteLine($"1. Зарегистрировать нового пользователя");
-        Console.WriteLine($"Команда: register");
-        Console.WriteLine($"2. Создать новую задачу:");
+        Console.WriteLine($"        Доступные роли: {RolesToString()}");
+        Console.WriteLine($"        Команда: create-user <логин> <пароль> <роль>");
+
+        Console.WriteLine($"\n2. Создать новую задачу");
+        Console.WriteLine($"\n3. Разлогиниться");
+        Console.WriteLine($"        Команда: logout");
+
+        Console.WriteLine($"\nВведите команду:");
     }
 
-    public override void HandleInput()
+    private string RolesToString()
     {
-        string? input = Console.ReadLine();
-        if (input == null) return;
+        string roles = string.Empty;
 
-        var (command, args) = parser.ParseCommand(input!);
-        Console.WriteLine($"Command: {command}");
-        foreach (var arg in args) Console.WriteLine(arg);
+        foreach (Role role in Enum.GetValues(typeof(Role)))
+        {
+            if (role == Role.Unathorized) continue;
+            roles += role.ToString() + ", ";
+        }
+
+        roles = roles.Substring(0, roles.Length - 2);
+
+        return roles;
     }
 }
