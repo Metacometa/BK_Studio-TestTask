@@ -20,15 +20,25 @@
         WriteNotification(userContext.Notification);
 
         Console.WriteLine($"\nДоступные действия:");
-        Console.WriteLine($"1. Зарегистрировать нового пользователя");
-        Console.WriteLine($"        Доступные роли: {RolesToString()}");
-        Console.WriteLine($"        Команда: create-user <логин> <пароль> <роль>");
+        Console.WriteLine();
+        PrintCommands();
 
-        Console.WriteLine($"\n2. Создать новую задачу");
-        Console.WriteLine($"\n3. Разлогиниться");
-        Console.WriteLine($"        Команда: logout");
+        WriteEndLine();
+        Console.Write($"> ");
+    }
 
-        Console.WriteLine($"\nВведите команду:");
+    private void PrintCommands()
+    {
+        List<ICommand> commands = commandRegistry.GetCommandsByRole(userContext.User.Role);
+
+        for (int i = 0; i < commands.Count; i++)
+        {
+            Console.Write($"{i + 1}. {commands[i].Description}");
+            Console.Write("\n   Команда: ");
+            WriteInstruction($"{commands[i].Prompt}");
+
+            Console.WriteLine();
+        }
     }
 
     private string RolesToString()

@@ -16,7 +16,7 @@
         if (user.Password != password)
         {
 
-            throw new UnauthorizedAccessException("Ошибка ввода: неверный пароль");
+            throw new UnauthorizedAccessException("[ОШИБКА]: Неверный пароль");
         }
 
         userContext.User = user;

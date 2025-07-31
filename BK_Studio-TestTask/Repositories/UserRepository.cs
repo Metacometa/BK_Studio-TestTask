@@ -19,7 +19,7 @@ public class UserRepository : IUserRepository
     {
         if (users.ContainsKey(user.Login) == true)
         {
-            throw new Exception("Ошибка ввода: этот логин уже занят");
+            throw new Exception($"[ОШИБКА]: Логин \"{user.Login}\" уже занят");
         }
 
         users.Add(user.Login, user);
@@ -34,7 +34,7 @@ public class UserRepository : IUserRepository
         }
         else
         {
-            throw new KeyNotFoundException("Ошибка ввода: пользователь не найден");
+            throw new KeyNotFoundException($"[ОШИБКА]: Пользователь с логином \"{username}\" не найден");
         }
     }
 

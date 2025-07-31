@@ -16,7 +16,7 @@
         }
         else
         {
-            throw new KeyNotFoundException($"Ошибка программы: невозможно создать экран с ключом \"{key}\"");
+            throw new KeyNotFoundException($"[ОШИБКА]: Невозможно создать экран с ключом \"{key}\"");
         }
     }
 
@@ -37,7 +37,7 @@
     {
         if (screens.ContainsKey(key))
         {
-            throw new InvalidOperationException($"Внутренняя ошибка: попытка переопределить экран \"{key}\"");
+            throw new InvalidOperationException($"[ОШИБКА]: Попытка переопределить экран \"{key}\"");
         }
 
         screens[key] = screen;

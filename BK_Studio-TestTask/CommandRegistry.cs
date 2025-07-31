@@ -15,7 +15,7 @@ public class CommandRegistry : ICommandRegistry
     {
         if (commands.ContainsKey(name))
         {
-            throw new InvalidOperationException($"Внутренняя ошибка: попытка переопределить реестр комманды {name}");
+            throw new InvalidOperationException($"[ОШИБКА]: Попытка переопределить реестр команды \"{name}\"");
         }
 
         commands[name] = command;
@@ -28,14 +28,14 @@ public class CommandRegistry : ICommandRegistry
         {
             if (IsAppropriateRole(name, role) == false)
             {
-                throw new KeyNotFoundException($"Ошибка ввода: у вас недостаточно прав для команды \"{name}\"");
+                throw new KeyNotFoundException($"[ОШИБКА]: У вас недостаточно прав для команды \"{name}\"");
             }
 
             return result;
         }
         else
         {
-            throw new KeyNotFoundException("Ошибка ввода: неверная команда");
+            throw new KeyNotFoundException("[ОШИБКА]: Неверная команда");
         }
     }
 
@@ -49,5 +49,21 @@ public class CommandRegistry : ICommandRegistry
         {
             return false;
         }
+    }
+
+    public List<ICommand> GetCommandsByRole(Role role)
+    {
+        List<ICommand> filteredCommands = new List<ICommand>();
+
+        foreach (var item in allowedRoles)
+        {
+            if (item.Value.Contains(role))
+            {
+                ICommand filteredCommand = commands[item.Key];
+                filteredCommands.Add(filteredCommand);   
+            }
+        }
+
+        return filteredCommands;
     }
 }

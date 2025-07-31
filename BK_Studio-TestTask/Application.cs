@@ -41,7 +41,7 @@
         catch (Exception ex)
         {
             EventBus.Instance.TriggerError();
-            userContext.Notification = $"Внутренняя ошибка: {ex.Message}";
+            userContext.Notification = $"{ex.Message}";
         }
     }
 

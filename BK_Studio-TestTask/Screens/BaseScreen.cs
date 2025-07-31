@@ -50,18 +50,21 @@
         Console.ForegroundColor = frameColor;
         Console.WriteLine("╔══════════════════════════════════════╗");
         Console.Write("║      ");
+
         Console.ForegroundColor = headerColor;
         Console.Write("СИСТЕМА УПРАВЛЕНИЯ ПРОЕКТОМ");
+
         Console.ForegroundColor = frameColor;
         Console.WriteLine("     ║");
         Console.WriteLine("╚══════════════════════════════════════╝");
+
         Console.ResetColor();
     }
 
     protected virtual void WriteEndLine()
     {
         Console.ForegroundColor = frameColor;
-        Console.WriteLine("\n────────────────────────────────────────");
+        Console.WriteLine("────────────────────────────────────────");
         Console.ResetColor();
     }
 

@@ -9,9 +9,16 @@
         this.parser = parser;
     }
 
-    public ICommand LogoutCommand() => new LogoutCommand(authService);
-    public ICommand AuthCommand() => new AuthCommand(authService);
-    public ICommand RegisterCommand() => new RegisterCommand(authService);
-    public ICommand CreateUserCommand() => new CreateUserCommand(authService, parser);
-    public ICommand ChangeStatusCommand() => new ChangeStatusCommand(authService, parser);
+    public ICommand LogoutCommand() => new LogoutCommand(authService, "Разлогиниться", "logout");
+    public ICommand AuthCommand() => new AuthCommand(authService, "Войти в систему", "auth <логин> <пароль>");
+    public ICommand RegisterCommand() => new RegisterCommand(authService, "Войти в систему", 
+        "register <логин> <пароль>");
+
+    public ICommand CreateUserCommand() => new CreateUserCommand(authService, parser, 
+        "Зарегистрировать нового пользователя",
+        "create-user <логин> <пароль> <роль>");
+
+    public ICommand ChangeStatusCommand() => new ChangeStatusCommand(authService, parser, 
+        "",
+        "");
 }

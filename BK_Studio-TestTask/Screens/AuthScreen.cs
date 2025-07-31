@@ -16,10 +16,24 @@
         WriteHeader();
         Console.WriteLine();
         WriteNotification(userContext.Notification);
-        Console.Write("\nДоступные команды: ");
-        WriteInstruction("\n  - auth <логин> <пароль>");
-        WriteEndLine(); 
 
-        Console.Write("Введите команду: ");
+        Console.WriteLine("\nДоступные команды: ");
+        Console.WriteLine();
+        PrintCommands();
+
+        Console.WriteLine();
+        WriteEndLine();
+        Console.Write("> ");
+    }
+
+    private void PrintCommands()
+    {
+        List<ICommand> commands = commandRegistry.GetCommandsByRole(userContext.User.Role);
+
+        for (int i = 0; i < commands.Count; i++)
+        {
+            Console.Write("  - ");
+            WriteInstruction($"{commands[i].Prompt}");
+        }
     }
 }

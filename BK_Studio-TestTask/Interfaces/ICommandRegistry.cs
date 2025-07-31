@@ -2,4 +2,5 @@
 {
     public void Register(string name, Role[] roles, ICommand command);
     public ICommand GetCommand(string name, Role role);
+    public List<ICommand> GetCommandsByRole(Role role);
 }
