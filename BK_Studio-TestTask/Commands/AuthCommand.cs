@@ -1,15 +1,13 @@
 ﻿public class AuthCommand : ICommand
 {
-    public string Description { get; private set; }
-    public string Prompt { get; }
+    public ICommandPrinter Printer { get; }
 
     private readonly IAuthService authService;
 
-    public AuthCommand(IAuthService authService, string description, string prompt)
+    public AuthCommand(IAuthService authService, ICommandPrinter printer)
     {
         this.authService = authService;
-        Description = description;
-        Prompt = prompt;
+        Printer = printer;
     }
 
     public void Execute(string[] args)

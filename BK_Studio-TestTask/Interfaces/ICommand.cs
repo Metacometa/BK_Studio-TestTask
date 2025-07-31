@@ -1,6 +1,5 @@
 ﻿public interface ICommand
 {
-    public string Description { get; }
-    public string Prompt { get; }
+    public ICommandPrinter Printer { get; }
     public abstract void Execute(string[] args);
 }

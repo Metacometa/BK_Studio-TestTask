@@ -13,16 +13,16 @@
 
     public override void Show()
     {
-        WriteHeader();
+        ConsoleRenderer.instance.WriteHeader();
         Console.WriteLine();
-        WriteNotification(userContext.Notification);
+        ConsoleRenderer.instance.WriteNotification(userContext.Notification);
 
         Console.WriteLine("\nДоступные команды: ");
         Console.WriteLine();
         PrintCommands();
 
         Console.WriteLine();
-        WriteEndLine();
+        ConsoleRenderer.instance.WriteEndLine();
         Console.Write("> ");
     }
 
@@ -33,7 +33,7 @@
         for (int i = 0; i < commands.Count; i++)
         {
             Console.Write("  - ");
-            WriteInstruction($"{commands[i].Prompt}");
+            ConsoleRenderer.instance.WriteInstruction($"{commands[i].Printer.Prompt}");
         }
     }
 }

@@ -1,17 +1,15 @@
 ﻿public class ChangeStatusCommand : ICommand
 {
-    public string Description { get; private set; }
-    public string Prompt { get; }
+    public ICommandPrinter Printer { get; }
 
     private readonly IAuthService authService;
     private readonly IParser parser;
 
-    public ChangeStatusCommand(IAuthService authService, IParser parser, string description, string prompt)
+    public ChangeStatusCommand(IAuthService authService, IParser parser, ICommandPrinter printer)
     {
         this.authService = authService;
         this.parser = parser;
-        Description = description;
-        Prompt = prompt;
+        Printer = printer;
     }
 
     public void Execute(string[] args)

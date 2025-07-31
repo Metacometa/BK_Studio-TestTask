@@ -15,15 +15,15 @@
 
     public override void Show()
     {
-        WriteHeader();
+        ConsoleRenderer.instance.WriteHeader();
         Console.WriteLine();
-        WriteNotification(userContext.Notification);
+        ConsoleRenderer.instance.WriteNotification(userContext.Notification);
 
         Console.WriteLine($"\nДоступные действия:");
         Console.WriteLine();
         PrintCommands();
 
-        WriteEndLine();
+        ConsoleRenderer.instance.WriteEndLine();
         Console.Write($"> ");
     }
 
@@ -33,26 +33,12 @@
 
         for (int i = 0; i < commands.Count; i++)
         {
-            Console.Write($"{i + 1}. {commands[i].Description}");
+            
+            Console.Write($"{i + 1}. {commands[i].Printer.Description}");
             Console.Write("\n   Команда: ");
-            WriteInstruction($"{commands[i].Prompt}");
+            ConsoleRenderer.instance.WriteInstruction($"{commands[i].Printer.Prompt}");
 
             Console.WriteLine();
         }
-    }
-
-    private string RolesToString()
-    {
-        string roles = string.Empty;
-
-        foreach (Role role in Enum.GetValues(typeof(Role)))
-        {
-            if (role == Role.Unathorized) continue;
-            roles += role.ToString() + ", ";
-        }
-
-        roles = roles.Substring(0, roles.Length - 2);
-
-        return roles;
     }
 }
