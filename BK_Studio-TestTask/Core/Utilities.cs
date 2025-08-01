@@ -14,4 +14,15 @@
 
         return roles;
     }
+    public static List<Role> GetRolesList()
+    {
+        List<Role> roles = new List<Role>();
+
+        foreach (Role role in Enum.GetValues(typeof(Role)))
+        {
+            roles.Add(role);
+        }
+
+        return roles;
+    }
 }

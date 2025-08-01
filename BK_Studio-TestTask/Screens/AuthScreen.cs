@@ -1,28 +1,29 @@
 ﻿public class AuthScreen : BaseScreen
 {
-    public AuthScreen(UserContext userContext, 
-        ICommandRegistry commandRegistry, 
-        IParser parser) : base(userContext, commandRegistry, parser) 
+    public AuthScreen(UserContext userContext, ICommandRegistry commandRegistry, 
+        IParser parser, IConsoleRenderer renderer) 
+            : base(userContext, commandRegistry, parser, renderer) 
     {
     }
 
     public override void SendStartMessage()
     {
-        userContext.Notification = "Добро пожаловать! \nДля работы требуется авторизация.";
+        userContext.Notification = new Notification(NotificationType.Info,
+            "Добро пожаловать! \nДля работы требуется авторизация.");
     }
 
     public override void Show()
     {
-        ConsoleRenderer.instance.WriteHeader();
+        renderer.PrintHeader();
         Console.WriteLine();
-        ConsoleRenderer.instance.WriteNotification(userContext.Notification);
+        renderer.PrintNotification(userContext.Notification);
 
         Console.WriteLine("\nДоступные команды: ");
         Console.WriteLine();
         PrintCommands();
 
         Console.WriteLine();
-        ConsoleRenderer.instance.WriteEndLine();
+        renderer.PrintEndLine();
         Console.Write("> ");
     }
 
@@ -32,8 +33,8 @@
 
         for (int i = 0; i < commands.Count; i++)
         {
-            Console.Write("  - ");
-            ConsoleRenderer.instance.WriteInstruction($"{commands[i].Printer.Prompt}");
+            Console.Write("   - ");
+            renderer.PrintInstruction($"{commands[i].Printer.Prompt}");
         }
     }
 }

@@ -2,17 +2,19 @@
 {
     protected readonly IParser parser;
     protected readonly ICommandRegistry commandRegistry;
+    protected readonly IConsoleRenderer renderer;
 
     protected readonly UserContext userContext;
 
-    public BaseScreen(UserContext userContext, ICommandRegistry commandRegistry, IParser parser)
+    public BaseScreen(UserContext userContext, ICommandRegistry commandRegistry, IParser parser, IConsoleRenderer renderer)
     {
         this.userContext = userContext;
         this.parser = parser;
         this.commandRegistry = commandRegistry;
+        this.renderer = renderer;
 
-        EventBus.Instance.error += ConsoleRenderer.instance.SetErrorNotificationColor;
-        EventBus.Instance.newMessage += ConsoleRenderer.instance.SetMessageNotificationColor;
+        //EventBus.Instance.error += ConsoleRenderer.instance.SetErrorNotificationColor;
+        //EventBus.Instance.newMessage += ConsoleRenderer.instance.SetMessageNotificationColor;
     }
 
     public abstract void SendStartMessage();
@@ -33,7 +35,7 @@
         catch (Exception ex)
         {
             EventBus.Instance.TriggerError();
-            userContext.Notification = ex.Message;
+            userContext.Notification = new Notification(NotificationType.Error, ex.Message);
         }
     }
 }

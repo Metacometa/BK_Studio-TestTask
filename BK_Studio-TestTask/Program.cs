@@ -16,13 +16,18 @@
 
     private static Application CreateApplication()
     {
+        var consoleTheme = new ConsoleTheme();
+        var rolePrinter = new RolePrinter(consoleTheme);
+        var notificationPrinter = new NotificationPrinter(consoleTheme);
+        var consoleRenderer = new ConsoleRenderer(consoleTheme, rolePrinter, notificationPrinter);
+
         var userContext = new UserContext();
         var userRepository = new UserRepository();
 
         var authService = new AuthService(userContext, userRepository);
         var parser = new Parser();
 
-        var commandFactory = new CommandFactory(authService, parser);
+        var commandFactory = new CommandFactory(authService, parser, consoleRenderer);
         var screenFactory = new ScreenFactory();
 
         var firstStartRegistry = new CommandRegistry();
@@ -56,15 +61,18 @@
         //Register screens
         screenFactory.Register(ScreenType.FirstRegister, new FirstRegisterScreen(userContext,
             firstStartRegistry,
-            parser));
+            parser,
+            consoleRenderer));
 
         screenFactory.Register(ScreenType.Auth, new AuthScreen(userContext,
             authRegistry,
-            parser));
+            parser,
+            consoleRenderer));
 
         screenFactory.Register(ScreenType.ManagerMenu, new ManagerScreen(userContext,
             menuRegistry,
-            parser));
+            parser,
+            consoleRenderer));
 
 
 

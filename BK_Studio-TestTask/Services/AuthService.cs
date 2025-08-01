@@ -35,7 +35,9 @@
         User user = new User(username, password, role);
         userRepository.AddUser(user);
 
-        userContext.Notification = $"Пользователь \"{username}\" с ролью \"{role}\" был создан";
+        userContext.Notification = new Notification(NotificationType.Success,
+            $"[УСПЕШНО]: Пользователь \"{username}\" с ролью \"{role}\" был создан");
+
         return user;
     }
 

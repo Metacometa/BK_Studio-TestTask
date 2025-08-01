@@ -41,7 +41,7 @@
         catch (Exception ex)
         {
             EventBus.Instance.TriggerError();
-            userContext.Notification = $"{ex.Message}";
+            userContext.Notification = new Notification(NotificationType.Error, ex.Message);
         }
     }
 

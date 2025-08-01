@@ -1,14 +1,15 @@
 ﻿public class FirstRegisterScreen : BaseScreen
 {
-    public FirstRegisterScreen(UserContext userContext, 
-        ICommandRegistry commandRegistry, 
-        IParser parser) : base(userContext, commandRegistry, parser) 
+    public FirstRegisterScreen(UserContext userContext, ICommandRegistry commandRegistry, 
+        IParser parser, IConsoleRenderer renderer) 
+        : base(userContext, commandRegistry, parser, renderer) 
     {
     }
 
     public override void SendStartMessage()
     {
-        userContext.Notification = "Первый старт! Создайте нового управляющего:";
+        userContext.Notification = new Notification(NotificationType.Info,
+            "Первый старт! Создайте нового управляющего:");
     }
 
     public override void Show()
