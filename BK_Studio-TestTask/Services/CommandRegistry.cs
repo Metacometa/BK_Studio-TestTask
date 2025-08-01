@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 
 public class CommandRegistry : ICommandRegistry
 {
@@ -28,14 +29,14 @@ public class CommandRegistry : ICommandRegistry
         {
             if (IsAppropriateRole(name, role) == false)
             {
-                throw new KeyNotFoundException($"[ОШИБКА]: У вас недостаточно прав для команды \"{name}\"");
+                throw new WarningException($"[ПРЕДУПРЕЖДЕНИЕ]: У вас недостаточно прав для команды \"{name}\"");
             }
 
             return result;
         }
         else
         {
-            throw new KeyNotFoundException("[ОШИБКА]: Неверная команда");
+            throw new WarningException("[ПРЕДУПРЕЖДЕНИЕ]: Неверная команда");
         }
     }
 

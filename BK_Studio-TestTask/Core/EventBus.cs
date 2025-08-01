@@ -18,6 +18,8 @@
     public event Action? error;
     public event Action? newMessage;
 
+    public event Action? screenDisplayed;
+
     public void TriggerAuthSuccessful()
     {
         authSuccessful?.Invoke();
@@ -41,5 +43,10 @@
     public void TriggerNewMessage()
     {
         newMessage?.Invoke();
+    }
+
+    public void TriggerScreenDisplayer()
+    {
+        screenDisplayed?.Invoke();
     }
 }

@@ -1,6 +1,6 @@
 ﻿public class ManagerScreen : BaseScreen
 {
-    public ManagerScreen(UserContext userContext, ICommandRegistry commandRegistry, 
+    public ManagerScreen(IUserContext userContext, ICommandRegistry commandRegistry, 
         IParser parser, IConsoleRenderer renderer) 
             : base(userContext, commandRegistry, parser, renderer) 
     {
@@ -17,15 +17,19 @@
     public override void Show()
     {
         renderer.PrintHeader();
-        Console.WriteLine();
+
         renderer.PrintNotification(userContext.Notification);
 
-        Console.WriteLine($"\nДоступные команды:");
+        renderer.PrintUserList(userContext.UserList, userContext.User.Login);
+
+        Console.WriteLine($"Доступные команды:");
         Console.WriteLine();
         PrintCommands();
 
         renderer.PrintEndLine();
         Console.Write($"> ");
+
+        EventBus.Instance.TriggerScreenDisplayer();
     }
 
     private void PrintCommands()

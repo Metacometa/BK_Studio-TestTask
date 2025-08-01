@@ -12,8 +12,13 @@
         ConsoleColor color = GetNotificationColor(notification);
 
         Console.ForegroundColor = color;
-        Console.WriteLine(notification.Text);
+        Console.Write(notification.Text);
         Console.ResetColor();
+
+        if (notification.Text != string.Empty)
+        {
+            Console.WriteLine("\n");
+        }
     }
 
     private ConsoleColor GetNotificationColor(Notification notification)
@@ -28,6 +33,8 @@
                 return theme.successColor;
             case NotificationType.Welcome:
                 return theme.welcomeColor;
+            case NotificationType.Warning:
+                return theme.warningColor;
             default:
                 return ConsoleColor.Gray;
         }

@@ -1,4 +1,6 @@
-﻿public class ChangeStatusCommand : ICommand
+﻿using System.ComponentModel;
+
+public class ChangeStatusCommand : ICommand
 {
     public ICommandPrinter Printer { get; }
 
@@ -16,7 +18,7 @@
     {
         if (args.Length != 3)
         {
-            throw new IndexOutOfRangeException("[ОШИБКА]: Неправильное количество аргументов");
+            throw new WarningException("[ПРЕДУПРЕЖДЕНИЕ]: Неправильное количество аргументов");
         }
 
         if (parser.TryParseRole(args[2], out Role role))

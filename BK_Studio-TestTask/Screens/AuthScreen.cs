@@ -1,6 +1,6 @@
 ﻿public class AuthScreen : BaseScreen
 {
-    public AuthScreen(UserContext userContext, ICommandRegistry commandRegistry, 
+    public AuthScreen(IUserContext userContext, ICommandRegistry commandRegistry, 
         IParser parser, IConsoleRenderer renderer) 
             : base(userContext, commandRegistry, parser, renderer) 
     {
@@ -15,10 +15,10 @@
     public override void Show()
     {
         renderer.PrintHeader();
-        Console.WriteLine();
+
         renderer.PrintNotification(userContext.Notification);
 
-        Console.WriteLine("\nДоступные команды: ");
+        Console.WriteLine("Доступные команды: ");
         Console.WriteLine();
         PrintCommands();
 

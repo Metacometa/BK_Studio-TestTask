@@ -1,4 +1,6 @@
-﻿public class AuthCommand : ICommand
+﻿using System.ComponentModel;
+
+public class AuthCommand : ICommand
 {
     public ICommandPrinter Printer { get; }
 
@@ -14,7 +16,7 @@
     {
         if (args.Length != 2)
         {
-            throw new IndexOutOfRangeException("[ОШИБКА]: Неправильное количество аргументов");
+            throw new WarningException("[ПРЕДУПРЕЖДЕНИЕ]: Неправильное количество аргументов");
         }
 
         authService.Login(args[0], args[1]);

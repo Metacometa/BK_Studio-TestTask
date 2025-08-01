@@ -1,6 +1,6 @@
 ﻿public enum NotificationType
 {
-    Error, Info, Success, Welcome, None
+    Error, Info, Success, Welcome, Warning, None
 }
 
 public class Notification

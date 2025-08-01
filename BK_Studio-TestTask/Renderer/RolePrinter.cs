@@ -16,11 +16,7 @@
         {
             Role role = roles[i];
 
-            ConsoleColor color = GetRoleColor(role);
-
-            Console.ForegroundColor = color;
-            Console.Write(role.ToString());
-            Console.ResetColor();
+            PrintRole(role);
 
             if (i != roles.Count - 1)
             {
@@ -29,7 +25,16 @@
         }
     }
 
-    private ConsoleColor GetRoleColor(Role role)
+    public void PrintRole(Role role)
+    {
+        ConsoleColor color = GetRoleColor(role);
+
+        Console.ForegroundColor = color;
+        Console.Write(role.ToString());
+        Console.ResetColor();
+    }
+
+    public ConsoleColor GetRoleColor(Role role)
     {
         switch (role)
         {

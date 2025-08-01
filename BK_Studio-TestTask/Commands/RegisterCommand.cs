@@ -1,4 +1,6 @@
-﻿public class RegisterCommand : ICommand
+﻿using System.ComponentModel;
+
+public class RegisterCommand : ICommand
 {
     public ICommandPrinter Printer { get; }
 
@@ -14,7 +16,7 @@
     {
         if (args.Length != 2)
         {
-            throw new IndexOutOfRangeException("[ОШИБКА]: Неправильное количество аргументов");
+            throw new WarningException("[ПРЕДУПРЕЖДЕНИЕ]: Неправильное количество аргументов");
         }
 
         User user = authService.CreateUser(args[0], args[1], Role.Manager);

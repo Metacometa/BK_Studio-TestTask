@@ -5,5 +5,6 @@
     public void PrintInstruction(string input);
     public void PrintNotification(Notification notification);
     public void PrintColorized(string input, ConsoleColor color);
+    public void PrintUserList(List<User> users, string currentLogin = "");
     public void PrintRoles();
 }

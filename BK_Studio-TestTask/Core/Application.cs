@@ -1,12 +1,14 @@
-﻿public class Application
+﻿using System.ComponentModel;
+
+public class Application
 {
-    private readonly UserContext userContext;
+    private readonly IUserContext userContext;
     private readonly ScreenFactory screenFactory;
 
     private readonly IUserRepository userRepository;
     private IScreen screen;
 
-    public Application(UserContext userContext, IUserRepository userRepository, ScreenFactory screenFactory)
+    public Application(IUserContext userContext, IUserRepository userRepository, ScreenFactory screenFactory)
     {
         this.userContext = userContext;
         this.screenFactory = screenFactory;
@@ -38,9 +40,12 @@
             Role role = userContext.User.Role;
             screen = screenFactory.CreateForRole(role);
         }
+        catch (WarningException ex)
+        {
+            userContext.Notification = new Notification(NotificationType.Warning, ex.Message);
+        }
         catch (Exception ex)
         {
-            EventBus.Instance.TriggerError();
             userContext.Notification = new Notification(NotificationType.Error, ex.Message);
         }
     }

@@ -1,4 +1,6 @@
-﻿class Program
+﻿using System.ComponentModel;
+
+class Program
 {
     static void Main(string[] args)
     {
@@ -25,9 +27,11 @@
         var userRepository = new UserRepository();
 
         var authService = new AuthService(userContext, userRepository);
+        var dataService = new DataService(userContext, userRepository);
+
         var parser = new Parser();
 
-        var commandFactory = new CommandFactory(authService, parser, consoleRenderer);
+        var commandFactory = new CommandFactory(authService, dataService, parser, consoleRenderer);
         var screenFactory = new ScreenFactory();
 
         var firstStartRegistry = new CommandRegistry();
@@ -49,9 +53,13 @@
             [Role.Manager],
             commandFactory.CreateUserCommand());
 
-        menuRegistry.Register("change-status",
-            [Role.Employee],
-            commandFactory.ChangeStatusCommand());
+        menuRegistry.Register("list-staff",
+            [Role.Manager],
+            commandFactory.ListStaffCommand());
+
+        /*        menuRegistry.Register("change-status",
+                    [Role.Employee],
+                    commandFactory.ChangeStatusCommand());*/
 
         menuRegistry.Register("logout",
             [Role.Employee, Role.Manager],

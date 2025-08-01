@@ -1,14 +1,14 @@
 ﻿using System.ComponentModel;
 
-public class LogoutCommand : ICommand
+public class ListStaffCommand : ICommand
 {
     public ICommandPrinter Printer { get; }
 
-    private readonly IAuthService authService;
+    private readonly IDataService dataService;
 
-    public LogoutCommand(IAuthService authService, ICommandPrinter printer)
+    public ListStaffCommand(IDataService dataService, ICommandPrinter printer)
     {
-        this.authService = authService;
+        this.dataService = dataService;
         Printer = printer;
     }
 
@@ -19,6 +19,6 @@ public class LogoutCommand : ICommand
             throw new WarningException("[ПРЕДУПРЕЖДЕНИЕ]: Неправильное количество аргументов");
         }
 
-        authService.Logout();
+        dataService.GetUsers();
     }
 }

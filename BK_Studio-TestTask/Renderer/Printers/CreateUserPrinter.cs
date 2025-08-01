@@ -11,7 +11,6 @@
         renderer.PrintRoles();
 
         Console.WriteLine();
-        Console.WriteLine();
 
         Console.Write("    - ");
         renderer.PrintInstruction($"{Prompt}");

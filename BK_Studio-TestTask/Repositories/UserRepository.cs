@@ -4,6 +4,10 @@ public class UserRepository : IUserRepository
 {
     private const string filePath = "users.json";
     private Dictionary<string, User> users;
+    public List<User> Users
+    {
+        get => new List<User>(users.Values);
+    }
 
     public int Count => users.Count;
 
@@ -35,14 +39,6 @@ public class UserRepository : IUserRepository
         else
         {
             throw new KeyNotFoundException($"[ОШИБКА]: Пользователь с логином \"{username}\" не найден");
-        }
-    }
-
-    public void GetUsers()
-    {
-        foreach (var user in users)
-        {
-            Console.WriteLine(user);
         }
     }
 }

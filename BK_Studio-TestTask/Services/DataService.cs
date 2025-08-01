@@ -1,12 +1,27 @@
-﻿public class AuthService : IAuthService
+﻿public class DataService : IDataService
 {
     private readonly IUserContext userContext;
     private readonly IUserRepository userRepository;
 
-    public AuthService(IUserContext userContext, IUserRepository userRepository)
+    public DataService(IUserContext userContext, IUserRepository userRepository)
     {
         this.userContext = userContext;
         this.userRepository = userRepository;
+    }
+
+    public void GetUsers()
+    {
+        List<User> users = userRepository.Users;
+
+        if (users.Count == 0)
+        {
+            userContext.Notification = new Notification(NotificationType.Info, "Список сотрудников пуст");
+        }
+        else
+        {
+            userContext.Notification = new Notification(NotificationType.Info, "");
+            userContext.UserList = users;
+        }
     }
 
     public void Login(string username, string password)

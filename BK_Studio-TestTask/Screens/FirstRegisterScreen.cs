@@ -1,6 +1,6 @@
 ﻿public class FirstRegisterScreen : BaseScreen
 {
-    public FirstRegisterScreen(UserContext userContext, ICommandRegistry commandRegistry, 
+    public FirstRegisterScreen(IUserContext userContext, ICommandRegistry commandRegistry, 
         IParser parser, IConsoleRenderer renderer) 
         : base(userContext, commandRegistry, parser, renderer) 
     {

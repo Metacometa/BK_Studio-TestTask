@@ -1,20 +1,19 @@
-﻿public abstract class BaseScreen : IScreen
+﻿using System.ComponentModel;
+
+public abstract class BaseScreen : IScreen
 {
     protected readonly IParser parser;
     protected readonly ICommandRegistry commandRegistry;
     protected readonly IConsoleRenderer renderer;
 
-    protected readonly UserContext userContext;
+    protected readonly IUserContext userContext;
 
-    public BaseScreen(UserContext userContext, ICommandRegistry commandRegistry, IParser parser, IConsoleRenderer renderer)
+    public BaseScreen(IUserContext userContext, ICommandRegistry commandRegistry, IParser parser, IConsoleRenderer renderer)
     {
         this.userContext = userContext;
         this.parser = parser;
         this.commandRegistry = commandRegistry;
         this.renderer = renderer;
-
-        //EventBus.Instance.error += ConsoleRenderer.instance.SetErrorNotificationColor;
-        //EventBus.Instance.newMessage += ConsoleRenderer.instance.SetMessageNotificationColor;
     }
 
     public abstract void SendStartMessage();
@@ -32,9 +31,12 @@
             command.Execute(args);
             EventBus.Instance.TriggerNewMessage();
         }
+        catch (WarningException ex)
+        {
+            userContext.Notification = new Notification(NotificationType.Warning, ex.Message);
+        }
         catch (Exception ex)
         {
-            EventBus.Instance.TriggerError();
             userContext.Notification = new Notification(NotificationType.Error, ex.Message);
         }
     }

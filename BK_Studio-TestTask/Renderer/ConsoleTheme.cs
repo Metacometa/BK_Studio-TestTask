@@ -10,6 +10,7 @@
     public ConsoleColor successColor = ConsoleColor.Green;
     public ConsoleColor infoColor = ConsoleColor.Cyan;
     public ConsoleColor welcomeColor = ConsoleColor.Cyan;
+    public ConsoleColor warningColor = ConsoleColor.DarkYellow;
 
     public ConsoleColor managerColor = ConsoleColor.DarkCyan;
     public ConsoleColor employeeColor = ConsoleColor.DarkYellow;
