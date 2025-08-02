@@ -41,9 +41,15 @@ public class TaskService : ITaskService
         return null;
     }
 
-    public void ChangeStatus(string name)
+    public void ChangeStatus(string name, TaskStatus status)
     {
+        Task task = taskRepository.GetByName(name);
+        task.TaskStatus = status;
 
+        taskRepository.UpdateTask(task);
+
+        userContext.Notification = new Notification(NotificationType.Success,
+            $"[УСПЕШНО]: Статус задачи \"{task.Name}\" теперь \"{status}\"");
     }
 
     public void AddExecutor(string name, string executor)

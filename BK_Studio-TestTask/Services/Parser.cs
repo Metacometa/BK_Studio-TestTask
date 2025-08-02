@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Data;
+using System.Text.RegularExpressions;
 
 public class Parser : IParser
 {
@@ -31,6 +32,25 @@ public class Parser : IParser
                 return true;
             default:
                 role = Role.Unathorized;
+                return false;
+        }
+    }
+
+    public bool TryParseTaskStatus(string input, out TaskStatus status)
+    {
+        switch (input)
+        {
+            case "ToDo":
+                status = TaskStatus.ToDo;
+                return true;
+            case "InProgress":
+                status = TaskStatus.InProgress;
+                return true;
+            case "Done":
+                status = TaskStatus.Done;
+                return true;
+            default:
+                status = TaskStatus.ToDo;
                 return false;
         }
     }

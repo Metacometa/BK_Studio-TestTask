@@ -107,11 +107,11 @@ class Program
         //Register Employee commands in menu
         menuRegistry.Register("my-tasks",
             [Role.Employee],
-            commandFactory.ListMyTasksCommand());   
+            commandFactory.ListMyTasksCommand());
 
-        /*        menuRegistry.Register("change-status",
-                    [Role.Employee],
-                    commandFactory.ChangeStatusCommand());*/
+        menuRegistry.Register("change-status",
+            [Role.Employee],
+            commandFactory.ChangeTaskStatusCommand());
 
         menuRegistry.Register("logout",
             [Role.Employee, Role.Manager],
@@ -127,13 +127,6 @@ class Program
 
         screenFactory.Register(ScreenType.Menu, 
             new MenuScreen(userContext, menuRegistry, parser, consoleRenderer));
-
-
-
-/*        screenFactory.Register("employee", new FirstRegisterScreen(userContext,
-new FirstRegisterCommandRegistry(commandFactory),
-parser));*/
-
 
 
         return new Application(userContext, userRepository, screenFactory);

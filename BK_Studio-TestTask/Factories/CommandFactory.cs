@@ -54,8 +54,9 @@
         new BasePrinter("Просмотреть список ваших задач",
             "my-tasks", renderer));
 
-    //public ICommand ChangeStatusCommand() => new ChangeStatusCommand(authService, parser,
-    //    new BasePrinter("", "", renderer));
+    public ICommand ChangeTaskStatusCommand() => new ChangeTaskStatusCommand(taskService, parser,
+        new BasePrinter("Изменить статус задачи", 
+            "change-status <задача> <новый_статус>", renderer));
 
     public ICommand ListStaffCommand() => new ListStaffCommand(contextManager,
         new BasePrinter("Получить список пользователей", 

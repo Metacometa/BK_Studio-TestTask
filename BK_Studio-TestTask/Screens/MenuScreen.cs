@@ -18,7 +18,6 @@
     {
         List<ICommand> commands = commandRegistry.GetCommandsByRole(userContext.User.Role);
 
-
         renderer.PrintHeader();
         renderer.PrintNotification(userContext.Notification);
 

@@ -50,7 +50,7 @@ public class UserContextManager : IUserContextManager
 
         if (tasks.Count == 0)
         {
-            userContext.Notification = new Notification(NotificationType.Info, "[Ваш список задач пуст");
+            userContext.Notification = new Notification(NotificationType.Info, "Ваш список задач пуст");
         }
         else
         {
