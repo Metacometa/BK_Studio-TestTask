@@ -38,7 +38,7 @@ public class Application
         try
         {
             Role role = userContext.User.Role;
-            screen = screenFactory.CreateForRole(role);
+            screen = screenFactory.Create(ScreenType.Menu);
         }
         catch (WarningException ex)
         {

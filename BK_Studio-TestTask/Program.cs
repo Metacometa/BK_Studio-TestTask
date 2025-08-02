@@ -19,14 +19,18 @@ class Program
     private static Application CreateApplication()
     {
         var consoleTheme = new ConsoleTheme();
+
         var rolePrinter = new RolePrinter(consoleTheme);
         var notificationPrinter = new NotificationPrinter(consoleTheme);
-        var consoleRenderer = new ConsoleRenderer(consoleTheme, rolePrinter, notificationPrinter);
+        var taskPrinter = new TaskPrinter(consoleTheme);
+        
+        var consoleRenderer = new ConsoleRenderer(consoleTheme, rolePrinter, 
+            notificationPrinter, taskPrinter);
 
         var userContext = new UserContext();
 
         UserRepository userRepository = null;
-        UserRepository taskRepository = null;
+        TaskRepository taskRepository = null;
         try
         {
             userRepository = new UserRepository();
@@ -42,7 +46,7 @@ class Program
 
         try
         {
-            taskRepository = new UserRepository();
+            taskRepository = new TaskRepository();
         }
         catch (Exception ex)
         {
@@ -54,11 +58,15 @@ class Program
         }
 
         var authService = new AuthService(userContext, userRepository!);
-        var dataService = new DataService(userContext, userRepository!);
+        var taskService = new TaskService(userContext, taskRepository!, userRepository!);
+        var contextManager = new UserContextManager(userContext, taskRepository, userRepository!);
 
         var parser = new Parser();
 
-        var commandFactory = new CommandFactory(authService, dataService, parser, consoleRenderer);
+        var commandFactory = new CommandFactory(authService, taskService, 
+            contextManager, 
+            userContext,
+            parser, consoleRenderer);
         var screenFactory = new ScreenFactory();
 
         var firstStartRegistry = new CommandRegistry();
@@ -75,14 +83,31 @@ class Program
             [Role.Unathorized],
             commandFactory.AuthCommand());
 
-        //Register menu commands
+        //Register Manager commands in menu
         menuRegistry.Register("create-user",
             [Role.Manager],
             commandFactory.CreateUserCommand());
 
+        menuRegistry.Register("create-task",
+            [Role.Manager],
+            commandFactory.CreateTaskCommand());
+
+        menuRegistry.Register("add-executor",
+            [Role.Manager],
+            commandFactory.AddExecutorCommand());
+
+        menuRegistry.Register("list-tasks",
+            [Role.Manager],
+            commandFactory.ListTasksCommand());
+
         menuRegistry.Register("list-staff",
             [Role.Manager],
             commandFactory.ListStaffCommand());
+
+        //Register Employee commands in menu
+        menuRegistry.Register("my-tasks",
+            [Role.Employee],
+            commandFactory.ListMyTasksCommand());   
 
         /*        menuRegistry.Register("change-status",
                     [Role.Employee],
@@ -100,8 +125,8 @@ class Program
         screenFactory.Register(ScreenType.Auth, 
             new AuthScreen(userContext, authRegistry, parser, consoleRenderer));
 
-        screenFactory.Register(ScreenType.ManagerMenu, 
-            new ManagerScreen(userContext, menuRegistry, parser, consoleRenderer));
+        screenFactory.Register(ScreenType.Menu, 
+            new MenuScreen(userContext, menuRegistry, parser, consoleRenderer));
 
 
 

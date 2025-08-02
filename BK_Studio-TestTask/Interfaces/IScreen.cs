@@ -1,6 +1,6 @@
 ﻿public enum ScreenType
 {
-    Auth, FirstRegister, ManagerMenu, EmployeeMenu
+    Auth, FirstRegister, Menu
 }
 
 public interface IScreen

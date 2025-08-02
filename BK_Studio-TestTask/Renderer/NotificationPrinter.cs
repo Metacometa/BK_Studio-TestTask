@@ -11,12 +11,13 @@
     {
         ConsoleColor color = GetNotificationColor(notification);
 
-        Console.ForegroundColor = color;
-        Console.Write(notification.Text);
-        Console.ResetColor();
-
         if (notification.Text != string.Empty)
         {
+            Console.ForegroundColor = color;
+            Console.WriteLine();
+            Console.Write(notification.Text);
+            Console.ResetColor();
+
             Console.WriteLine("\n");
         }
     }

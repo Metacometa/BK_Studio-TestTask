@@ -9,8 +9,8 @@ public class Task
     public int ProjectId { get; set; }
     public string Name { get; set; } 
     public string Description { get; set; }
-
     public TaskStatus TaskStatus { get; set; }
+    public HashSet<string> Executors { get; set; }
 
     public Task()
     {
@@ -18,6 +18,8 @@ public class Task
         Name = string.Empty;
         Description = string.Empty;
         TaskStatus = TaskStatus.ToDo;
+
+        Executors = new HashSet<string>();
     }
 
     public Task(int id, int projectId, string name, string description)
@@ -27,5 +29,19 @@ public class Task
         Name = name;
         Description = description;
         TaskStatus = TaskStatus.ToDo;
+
+        Executors = new HashSet<string>();
+    }
+
+    public void AddExecutor(string name)
+    {
+        if (Executors.Contains(name))
+        {
+            throw new Exception($"[ОШИБКА]: исполнитель {name} уже назначен на задачу {Name}");
+        }
+        else
+        {
+            Executors.Add(name);
+        }
     }
 }

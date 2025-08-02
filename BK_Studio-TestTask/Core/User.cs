@@ -23,4 +23,6 @@ public class User
         Password = string.Empty;
         Role = Role.Unathorized;
     }
+
+
 }

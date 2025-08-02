@@ -18,8 +18,8 @@
 
         renderer.PrintNotification(userContext.Notification);
 
-        Console.WriteLine("Доступные команды: ");
-        Console.WriteLine();
+        renderer.PrintSubheader("Доступные команды");
+        //Console.WriteLine("Доступные команды: ");
         PrintCommands();
 
         Console.WriteLine();

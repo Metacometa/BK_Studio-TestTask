@@ -3,26 +3,51 @@
     private readonly ConsoleTheme theme;
     private readonly IRolePrinter rolePrinter;
     private readonly INotificationPrinter notificationPrinter;
+    private readonly ITaskPrinter taskPrinter;
 
-    public ConsoleRenderer(ConsoleTheme theme, IRolePrinter rolePrinter, INotificationPrinter notificationPrinter)
+    public ConsoleRenderer(ConsoleTheme theme, IRolePrinter rolePrinter, 
+        INotificationPrinter notificationPrinter, ITaskPrinter taskPrinter)
     {
         this.theme = theme;
+
         this.rolePrinter = rolePrinter;
         this.notificationPrinter = notificationPrinter;
+        this.taskPrinter = taskPrinter;
     }
 
     public void PrintHeader()
     {
         Console.ForegroundColor = theme.frameColor;
-        Console.WriteLine("╔══════════════════════════════════════╗");
+        Console.WriteLine("╔═══════════════════════════════════════╗");
+        Console.WriteLine("║                                       ║");
         Console.Write("║      ");
 
         Console.ForegroundColor = theme.headerColor;
         Console.Write("СИСТЕМА УПРАВЛЕНИЯ ПРОЕКТОМ");
 
         Console.ForegroundColor = theme.frameColor;
-        Console.WriteLine("     ║");
-        Console.WriteLine("╚══════════════════════════════════════╝");
+        Console.WriteLine("      ║");
+        Console.WriteLine("║                                       ║");
+        Console.WriteLine("╚═══════════════════════════════════════╝");
+
+        Console.ResetColor();
+    }
+
+    public void PrintSubheader(string input)
+    {
+        string topFrame = "╔═══════════════════════════════════════╗";
+        int topFramgeLength = topFrame.Length;
+
+        Console.ForegroundColor = theme.frameColor;
+        Console.WriteLine(topFrame);
+        Console.Write("║ ");
+
+        Console.ForegroundColor = theme.headerColor;
+        Console.Write($"{input}");
+
+        Console.ForegroundColor = theme.frameColor;
+        Console.WriteLine(new string(' ', topFramgeLength - input.Length - 3) + "║");
+        Console.WriteLine("╚═══════════════════════════════════════╝");
 
         Console.ResetColor();
 
@@ -39,7 +64,7 @@
     public void PrintEndLine()
     {
         Console.ForegroundColor = theme.frameColor;
-        Console.WriteLine("════════════════════════════════════════");
+        Console.WriteLine("═════════════════════════════════════════");
         Console.ResetColor();
     }
 
@@ -66,11 +91,61 @@
     {
         if (users.Count == 0 ) { return; }
 
-        Console.WriteLine("Список сотрудников: ");
-        Console.WriteLine();
+        PrintSubheader("Список сотрудников");
 
-        Dictionary<Role, List<User>> usersByRoles = SortUsersByRoles(users);
+        Dictionary<Role, List<User>> usersByRoles = Utilities.SortUsersByRoles(users);
         PrintUsersByRoles(usersByRoles, currentLogin);
+    }
+
+    public void PrintTaskList(List<Task> tasks)
+    {   
+        if (tasks.Count == 0) { return; }
+
+        PrintSubheader("Список задач");
+
+        for (int i = 0; i < tasks.Count; ++i)
+        {
+            Task task = tasks[i];
+            Console.Write($"[{i + 1}] ");
+
+            taskPrinter.PrintTask(task);
+
+            Console.WriteLine();
+            Console.WriteLine();
+        }
+    }
+
+    public void PrintMyTaskList(List<Task> tasks)
+    {
+        if (tasks.Count == 0) { return; }
+
+        PrintSubheader("Список ваших задач");
+        for (int i = 0; i < tasks.Count; ++i)
+        {
+            Task task = tasks[i];
+            Console.Write($"[{i + 1}] ");
+
+            taskPrinter.PrintTask(task);
+
+            Console.WriteLine();
+            Console.WriteLine();
+        }
+    }
+
+
+    public void PrintCommands(List<ICommand> commands)
+    {
+        if (commands.Count == 0) { return; }
+
+        PrintSubheader("Доступные команды");
+        //Console.WriteLine($"Доступные команды:");
+
+        for (int i = 0; i < commands.Count; i++)
+        {
+            Console.Write($"[{i + 1}] ");
+            commands[i].Printer.PrintHelp();
+            Console.WriteLine();
+        }
     }
 
     private void PrintUsersByRoles(Dictionary<Role, List<User>> usersByRoles,
@@ -98,26 +173,6 @@
             }
             Console.WriteLine();
         }
-
-        PrintSeparator();
-        Console.WriteLine();
-    }
-
-    private Dictionary<Role, List<User>> SortUsersByRoles(List<User> users)
-    {
-        Dictionary<Role, List<User>> usersByRoles = new Dictionary<Role, List<User>>();
-
-        foreach (User user in users)
-        {
-            if (!usersByRoles.TryGetValue(user.Role, out List<User> value))
-            {
-                usersByRoles[user.Role] = new List<User>();
-            }
-
-            usersByRoles[user.Role].Add(user);
-        }
-
-        return usersByRoles;
     }
 
     public void PrintRoles()

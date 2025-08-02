@@ -20,19 +20,6 @@
         }
     }
 
-    public IScreen CreateForRole(Role role)
-    {
-        switch (role)
-        {
-            case Role.Employee:
-                return Create(ScreenType.EmployeeMenu);
-            case Role.Manager:
-                return Create(ScreenType.ManagerMenu);
-            default:
-                return null;
-        }
-    }
-
     public void Register(ScreenType key, IScreen screen)
     {
         if (screens.ContainsKey(key))

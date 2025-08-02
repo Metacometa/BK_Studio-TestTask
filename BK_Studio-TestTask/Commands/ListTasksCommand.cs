@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel;
 
-public class ListStaffCommand : ICommand
+public class ListTasksCommand : ICommand
 {
     public ICommandPrinter Printer { get; }
 
     private readonly IUserContextManager contextManager;
 
-    public ListStaffCommand(IUserContextManager contextManager, ICommandPrinter printer)
+    public ListTasksCommand(IUserContextManager contextManager, ICommandPrinter printer)
     {
         this.contextManager = contextManager;
         Printer = printer;
@@ -19,6 +19,6 @@ public class ListStaffCommand : ICommand
             throw new WarningException("[ПРЕДУПРЕЖДЕНИЕ]: Неправильное количество аргументов");
         }
 
-        contextManager.GetUsers();
+        contextManager.GetTasks();
     }
 }

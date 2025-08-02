@@ -4,12 +4,12 @@ public class UserRepository : IUserRepository
 {
     private const string filePath = "users.json";
     private Dictionary<string, User> users;
+    public int Count => users.Count;
+
     public List<User> Users
     {
         get => new List<User>(users.Values);
     }
-
-    public int Count => users.Count;
 
     public UserRepository()
     {
