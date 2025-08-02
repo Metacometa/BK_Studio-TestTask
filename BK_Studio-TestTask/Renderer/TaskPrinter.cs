@@ -1,4 +1,6 @@
-﻿public class TaskPrinter : ITaskPrinter
+﻿using System.Data;
+
+public class TaskPrinter : ITaskPrinter
 {
     private readonly ConsoleTheme theme;
 
@@ -82,5 +84,38 @@
         Console.ForegroundColor = color;
         Console.Write(input);
         Console.ResetColor();
+    }
+
+    public void PrintTaskStatuses()
+    {
+        List<TaskStatus> taskStatuses = Utilities.GetTaskStatusesList();
+
+        for (int i = 0; i < taskStatuses.Count; ++i)
+        {
+            TaskStatus taskStatus = taskStatuses[i];
+            Console.ForegroundColor = GetStatusColor(taskStatus);
+            Console.Write(taskStatus.ToString());
+            Console.ResetColor();
+
+            if (i != taskStatuses.Count - 1)
+            {
+                Console.Write(" | ");
+            }
+        }
+    }
+
+    private ConsoleColor GetStatusColor(TaskStatus status)
+    {
+        switch (status)
+        {
+            case TaskStatus.ToDo:
+                return theme.toDoColor;
+            case TaskStatus.InProgress:
+                return theme.inProgressColor;
+            case TaskStatus.Done:
+                return theme.doneColor;
+            default:
+                return ConsoleColor.Gray;
+        }
     }
 }

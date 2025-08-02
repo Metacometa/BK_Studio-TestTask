@@ -27,9 +27,7 @@
 
     public void PrintRole(Role role)
     {
-        ConsoleColor color = GetRoleColor(role);
-
-        Console.ForegroundColor = color;
+        Console.ForegroundColor = GetRoleColor(role);
         Console.Write(role.ToString());
         Console.ResetColor();
     }

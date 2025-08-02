@@ -26,6 +26,18 @@
         return roles;
     }
 
+    public static List<TaskStatus> GetTaskStatusesList()
+    {
+        List<TaskStatus> taskStatuses = new List<TaskStatus>();
+
+        foreach (TaskStatus taskStatus in Enum.GetValues(typeof(TaskStatus)))
+        {
+            taskStatuses.Add(taskStatus);
+        }
+
+        return taskStatuses;
+    }
+
     public static Dictionary<Role, List<User>> SortUsersByRoles(List<User> users)
     {
         Dictionary<Role, List<User>> usersByRoles = new Dictionary<Role, List<User>>();

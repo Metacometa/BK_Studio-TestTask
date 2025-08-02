@@ -132,7 +132,6 @@
         }
     }
 
-
     public void PrintCommands(List<ICommand> commands)
     {
         if (commands.Count == 0) { return; }
@@ -178,5 +177,10 @@
     public void PrintRoles()
     {
         rolePrinter.PrintRoles();
+    }
+
+    public void PrintTaskStatuses()
+    {
+        taskPrinter.PrintTaskStatuses();
     }
 }

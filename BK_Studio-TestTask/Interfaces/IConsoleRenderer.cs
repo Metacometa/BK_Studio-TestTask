@@ -12,4 +12,5 @@
     public void PrintMyTaskList(List<Task> users);
     public void PrintCommands(List<ICommand> commands);
     public void PrintRoles();
+    public void PrintTaskStatuses();
 }

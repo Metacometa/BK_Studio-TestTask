@@ -55,7 +55,7 @@
             "my-tasks", renderer));
 
     public ICommand ChangeTaskStatusCommand() => new ChangeTaskStatusCommand(taskService, parser,
-        new BasePrinter("Изменить статус задачи", 
+        new ChangeTaskStatusPrinter("Изменить статус задачи", 
             "change-status <задача> <новый_статус>", renderer));
 
     public ICommand ListStaffCommand() => new ListStaffCommand(contextManager,

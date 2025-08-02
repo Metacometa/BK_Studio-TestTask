@@ -5,7 +5,7 @@
     public ConsoleColor headerColor = ConsoleColor.White;
 
     public ConsoleColor toDoColor = ConsoleColor.Yellow;
-    public ConsoleColor inProgressColor = ConsoleColor.Red;
+    public ConsoleColor inProgressColor = ConsoleColor.DarkCyan;
     public ConsoleColor doneColor = ConsoleColor.Green;
 
     public ConsoleColor executorColor = ConsoleColor.White;
