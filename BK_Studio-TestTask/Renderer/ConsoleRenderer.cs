@@ -29,10 +29,17 @@
         Console.WriteLine();
     }
 
-    public void PrintEndLine()
+    public void PrintSeparator()
     {
         Console.ForegroundColor = theme.frameColor;
         Console.WriteLine("────────────────────────────────────────");
+        Console.ResetColor();
+    }
+
+    public void PrintEndLine()
+    {
+        Console.ForegroundColor = theme.frameColor;
+        Console.WriteLine("════════════════════════════════════════");
         Console.ResetColor();
     }
 
@@ -92,7 +99,7 @@
             Console.WriteLine();
         }
 
-        PrintEndLine();
+        PrintSeparator();
         Console.WriteLine();
     }
 

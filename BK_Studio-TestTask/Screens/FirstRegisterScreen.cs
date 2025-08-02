@@ -14,10 +14,33 @@
 
     public override void Show()
     {
-        Console.WriteLine("=== Система управления проектом ===");
+        renderer.PrintHeader();
 
-        Console.WriteLine(userContext.Notification);
+        renderer.PrintNotification(userContext.Notification);
+        Console.WriteLine("Доступные команды: ");
+        Console.WriteLine();
+        PrintCommands();
 
-        Console.WriteLine("\nКоманда для создания управляющего: register <логин> <пароль>");
+        Console.WriteLine();
+        renderer.PrintEndLine();
+        Console.Write("> ");
+
+
+        //Console.WriteLine("=== Система управления проектом ===");
+
+        //Console.WriteLine(userContext.Notification);
+
+        //Console.WriteLine("\nКоманда для создания управляющего: register <логин> <пароль>");
+    }
+
+    private void PrintCommands()
+    {
+        List<ICommand> commands = commandRegistry.GetCommandsByRole(userContext.User.Role);
+
+        for (int i = 0; i < commands.Count; i++)
+        {
+            Console.Write("   - ");
+            renderer.PrintInstruction($"{commands[i].Printer.Prompt}");
+        }
     }
 }

@@ -23,6 +23,7 @@
         PrintCommands();
 
         Console.WriteLine();
+
         renderer.PrintEndLine();
         Console.Write("> ");
     }
