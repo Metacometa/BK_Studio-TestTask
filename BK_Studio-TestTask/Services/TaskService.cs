@@ -44,12 +44,20 @@ public class TaskService : ITaskService
     public void ChangeStatus(string name, TaskStatus status)
     {
         Task task = taskRepository.GetByName(name);
-        task.TaskStatus = status;
+        if (task.Executors.Contains(userContext.User.Login) == false)
+        {
+            userContext.Notification = new Notification(NotificationType.Error,
+                $"[ОШИБКА]: Вы не назначены на задачу \"{name}\"");
+        }
+        else
+        {
+            task.TaskStatus = status;
 
-        taskRepository.UpdateTask(task);
+            taskRepository.UpdateTask(task);
 
-        userContext.Notification = new Notification(NotificationType.Success,
-            $"[УСПЕШНО]: Статус задачи \"{task.Name}\" теперь \"{status}\"");
+            userContext.Notification = new Notification(NotificationType.Success,
+                $"[УСПЕШНО]: Статус задачи \"{task.Name}\" теперь \"{status}\"");
+        }
     }
 
     public void AddExecutor(string name, string executor)
