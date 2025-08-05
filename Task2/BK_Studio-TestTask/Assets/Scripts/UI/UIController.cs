@@ -6,7 +6,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private Transform content;
     [SerializeField] private GameObject selectableUIItem;
 
-    public void Init(List<SceneObject> sceneObjects, ISeleñtManager seleñtManager)
+    public void Init(List<SceneObject> sceneObjects, ISeleñtManager seleñtManager, IEventBus eventBus)
     {
         foreach (SceneObject sceneObject in sceneObjects)
         {
@@ -14,7 +14,7 @@ public class UIController : MonoBehaviour
 
             if (uiItem.TryGetComponent(out SelectableUIItem selectableItem))
             {
-                selectableItem.Init(sceneObject, sceneObject.Name, seleñtManager);
+                selectableItem.Init(sceneObject, sceneObject.Name, seleñtManager, eventBus);
             }
         }
     }

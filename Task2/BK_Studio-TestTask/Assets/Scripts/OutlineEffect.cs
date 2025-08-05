@@ -22,7 +22,6 @@ public class OutlineEffect : MonoBehaviour, IOutlineEffect
     public void DisableOutline()
     {
         SetProperty(false);
-        Debug.Log("DiasbleOutline");
     }
 
     private void SetProperty(bool enabled)
@@ -30,16 +29,6 @@ public class OutlineEffect : MonoBehaviour, IOutlineEffect
         rend?.GetPropertyBlock(propertyBlock);
 
         propertyBlock.SetFloat(propertyName, enabled ? 1f : 0f);
-
-/*        if (propertyBlock.HasProperty(propertyName))
-        {
-            Debug.Log("True");
-            //propertyBlock.SetFloat(propertyName, enabled ? 1f : 0f);
-        }
-        else
-        {
-            Debug.Log("False");
-        }*/
 
         rend?.SetPropertyBlock(propertyBlock);
     }

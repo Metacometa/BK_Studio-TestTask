@@ -6,22 +6,28 @@ public class SelectableUIItem : MonoBehaviour
     private ISeleñtManager seleñtManager;
     private ISelectable target;
 
-    [SerializeField] private Toggle SelectionToggle;
-    [SerializeField] private Toggle ViewToggle;
+    private IEventBus eventBus;
+
+    [SerializeField] private Toggle selectionToggle;
+    [SerializeField] private Toggle viewToggle;
 
     [SerializeField] private Text label;
 
-    public void Init(ISelectable target, string name, ISeleñtManager seleñtManager)
+    public void Init(ISelectable target, string name, 
+        ISeleñtManager seleñtManager, IEventBus eventBus)
     {
         this.seleñtManager = seleñtManager;
         this.target = target;
+        this.eventBus = eventBus;
 
         label.text = name;
 
-        SelectionToggle.onValueChanged.AddListener(OnSelectionChanged);
+        selectionToggle.onValueChanged.AddListener(OnSelectionToggled);
+
+        eventBus.OnMouseSelected += MouseSelectionHandler;
     }
 
-    private void OnSelectionChanged(bool selected)
+    private void OnSelectionToggled(bool selected)
     {
         if (selected)
         {
@@ -32,4 +38,17 @@ public class SelectableUIItem : MonoBehaviour
             seleñtManager.Remove(target);
         }
     }
+
+    private void MouseSelectionHandler(ISelectable obj)
+    {
+        if (obj == null)
+        {
+            selectionToggle.isOn = false;
+        }
+        else if (obj == target)
+        {
+            selectionToggle.isOn = true;
+        }
+    }
+
 }

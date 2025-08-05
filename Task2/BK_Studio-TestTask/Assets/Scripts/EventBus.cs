@@ -1,16 +1,18 @@
+using System;
 using UnityEngine;
 
-public class EventBus : MonoBehaviour
+public class EventBus : IEventBus
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public event Action<Vector3> OnLeftClick;
+    public event Action<ISelectable> OnMouseSelected;
+
+    public void LeftClick(Vector3 mousePos)
     {
-        
+        OnLeftClick?.Invoke(mousePos);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void MouseSelect(ISelectable obj)
     {
-        
+        OnMouseSelected?.Invoke(obj);
     }
 }

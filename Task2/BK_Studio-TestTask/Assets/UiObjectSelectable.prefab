@@ -388,8 +388,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d66a52e3cf385da49be6edc1b10acbe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectionToggle: {fileID: 8685561275354169209}
-  ViewToggle: {fileID: 1063769046033596910}
+  selectionToggle: {fileID: 8685561275354169209}
+  viewToggle: {fileID: 1063769046033596910}
   label: {fileID: 6695952487652987061}
 --- !u!1 &5433160349342575711
 GameObject:

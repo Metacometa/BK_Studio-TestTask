@@ -4,16 +4,17 @@ using UnityEngine;
 public class SelectManager : MonoBehaviour, ISeleсtManager
 {
     private HashSet<ISelectable> selected;
+
     public void Init()
     {
         selected = new HashSet<ISelectable>();
     }
     public List<ISelectable> GetSelectedObjects => new List<ISelectable>(selected);
-
+    
     public void Add(ISelectable obj)
     {
         obj.Select();
-        selected.Add(obj);
+        selected.Add(obj); 
     }
 
     public void Remove(ISelectable obj)
@@ -23,5 +24,20 @@ public class SelectManager : MonoBehaviour, ISeleсtManager
             obj.Deselect();
             selected.Remove(obj);
         }
+    }
+
+    public void RemoveAll()
+    {
+        foreach (ISelectable obj in selected)
+        {
+            obj.Deselect();
+        }
+
+        selected.Clear();
+    }
+
+    public bool Contains(ISelectable obj)
+    {
+        return selected.Contains(obj);
     }
 }
