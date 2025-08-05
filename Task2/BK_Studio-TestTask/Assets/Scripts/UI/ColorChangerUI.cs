@@ -8,6 +8,7 @@ public class ColorChangerUI : MonoBehaviour
     [SerializeField] private Slider rSlider;
     [SerializeField] private Slider gSlider;
     [SerializeField] private Slider bSlider;
+    [SerializeField] private Slider aSlider;
 
     public void Init(IEventBus eventBus)
     {
@@ -15,7 +16,8 @@ public class ColorChangerUI : MonoBehaviour
 
         rSlider.onValueChanged.AddListener(OnSliderChanged);
         gSlider.onValueChanged.AddListener(OnSliderChanged);
-        rSlider.onValueChanged.AddListener(OnSliderChanged);
+        bSlider.onValueChanged.AddListener(OnSliderChanged);
+        aSlider.onValueChanged.AddListener(OnSliderChanged);
     }
 
     private void OnSliderChanged(float val)
@@ -23,7 +25,8 @@ public class ColorChangerUI : MonoBehaviour
         float r = rSlider.value;
         float g = gSlider.value;
         float b = bSlider.value;
+        float a = aSlider.value;
 
-        eventBus?.ChangeColor(new Color(r, g, b));
+        eventBus?.ChangeColor(new Color(r, g, b, a));
     }
 }

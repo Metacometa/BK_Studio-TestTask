@@ -13,15 +13,17 @@ Shader "Custom/OutlineShader"
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
+        Tags { "RenderType"="Transparent" "Queue"="Transparent" }
 
         Pass 
         {
             Cull Front
             ZWrite On
             ZTest Less
+            Blend SrcAlpha OneMinusSrcAlpha
 
             CGPROGRAM
+            fixed4  _Color;
             fixed4 _OutlineColor;
             fixed _OutlineWidth;
             float _OutlineEnabled;
@@ -60,17 +62,18 @@ Shader "Custom/OutlineShader"
                     discard;
                 }
 
-                return _OutlineColor;
+                return float4(_OutlineColor.rgb, _Color.a);
             };
             ENDCG
         }
 
         Cull Back
         ZWrite On
-        ZTest LEqual
+        ZTest LEqual        
+        Blend SrcAlpha OneMinusSrcAlpha
 
         CGPROGRAM
-        #pragma surface surf Standard fullforwardshadows
+        #pragma surface surf Standard fullforwardshadows alpha:fade
         #pragma target 3.0
 
         sampler2D _MainTex;
