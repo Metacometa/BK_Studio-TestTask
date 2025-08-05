@@ -6,6 +6,7 @@ public class SceneInitializer : MonoBehaviour
     [SerializeField] private ObjectManager objectManager;
     [SerializeField] private InputManager inputManager;
     [SerializeField] private SelectManager selectManager;
+    [SerializeField] private VisualManager visualManager;
 
     [SerializeField] private UserController userController;
     [SerializeField] private UIController uIContoller;
@@ -18,6 +19,8 @@ public class SceneInitializer : MonoBehaviour
 
         objectManager?.Init();
         selectManager?.Init();
+
+        visualManager?.Init(selectManager, eventBus);
         inputManager?.Init(eventBus);
 
         userController.Init(eventBus, selectManager);

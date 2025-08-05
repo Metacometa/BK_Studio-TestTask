@@ -5,10 +5,12 @@ public class SceneObject : MonoBehaviour, ISceneObject
     public string Name => gameObject.name;
 
     private OutlineEffect outlineEffect;
+    private RendererController rendererController;
 
     void Awake()
     {
         outlineEffect = GetComponent<OutlineEffect>();
+        rendererController = GetComponent<RendererController>();
     }
 
     public void Select()
@@ -19,5 +21,10 @@ public class SceneObject : MonoBehaviour, ISceneObject
     public void Deselect()
     {
         outlineEffect?.DisableOutline();
+    }
+
+    public void ModifyColor(Color color)
+    {
+        rendererController.SetColor(color);
     }
 }

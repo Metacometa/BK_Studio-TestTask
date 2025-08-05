@@ -1,4 +1,4 @@
-﻿public interface ISceneObject : ISelectable
+﻿public interface ISceneObject : ISelectable, IModifiable
 {
     public string Name { get; }
 }
