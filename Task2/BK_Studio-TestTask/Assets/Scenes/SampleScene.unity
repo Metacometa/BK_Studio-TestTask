@@ -1556,6 +1556,7 @@ GameObject:
   - component: {fileID: 684010316}
   - component: {fileID: 684010317}
   - component: {fileID: 684010318}
+  - component: {fileID: 684010319}
   m_Layer: 0
   m_Name: UserController
   m_TagString: Untagged
@@ -1605,6 +1606,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcd77c80aedace044871efeb1c06adf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &684010319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 684010315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af92d077b605b264a8eabd233d568a5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoomSpeed: 20
+  moveSpeed: 10
+  rotationSpeed: 100
+  focusMask:
+    serializedVersion: 2
+    m_Bits: 64
+  focusOffset: 3
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -2634,6 +2654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dc0adfb135cd1647abb3ae83a883807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doubleClickThreshold: 0.3
 --- !u!1 &1019043617
 GameObject:
   m_ObjectHideFlags: 0
