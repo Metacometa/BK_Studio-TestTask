@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SelectableUIItem : MonoBehaviour
+public class SceneObjectUIItem : MonoBehaviour
 {
     private ISeleñtManager seleñtManager;
-    private ISelectable target;
+    private ISceneObject target;
 
     private IEventBus eventBus;
 
@@ -13,7 +13,7 @@ public class SelectableUIItem : MonoBehaviour
 
     [SerializeField] private Text label;
 
-    public void Init(ISelectable target, string name, 
+    public void Init(ISceneObject target, string name, 
         ISeleñtManager seleñtManager, IEventBus eventBus)
     {
         this.seleñtManager = seleñtManager;
@@ -23,12 +23,16 @@ public class SelectableUIItem : MonoBehaviour
         label.text = name;
 
         selectionToggle.onValueChanged.AddListener(OnSelectionToggled);
+        viewToggle.onValueChanged.AddListener(OnViewToggled);
 
-        eventBus.OnSelected += ToggleOn;
-        eventBus.OnDeselected += ToggleOff;
+        eventBus.OnSelected += SelectionToggleOn;
+        eventBus.OnDeselected += SelectionToggleOff;
 
-        eventBus.OnSelectedAll += ToggleOn;
-        eventBus.OnDeselectedAll += ToggleOff;
+        eventBus.OnSelectedAll += SelectionToggleOn;
+        eventBus.OnDeselectedAll += SelectionToggleOff;
+
+
+        eventBus.OnSetActive += ViewToggle;
     }
 
     private void OnSelectionToggled(bool selected)
@@ -43,7 +47,19 @@ public class SelectableUIItem : MonoBehaviour
         }
     }
 
-    private void ToggleOn(ISelectable obj)
+    private void OnViewToggled(bool value)
+    {
+        target.SetActive(value);
+    }
+
+
+    private void ViewToggle(bool value)
+    {
+        viewToggle.isOn = value;
+    }
+
+
+    private void SelectionToggleOn(ISelectable obj)
     {
         if (obj == target)
         {
@@ -51,10 +67,7 @@ public class SelectableUIItem : MonoBehaviour
         }
     }
 
-    private void ToggleOn() => selectionToggle.isOn = true;
-    private void ToggleOff() => selectionToggle.isOn = false;
-
-    private void ToggleOff(ISelectable obj)
+    private void SelectionToggleOff(ISelectable obj)
     {
         if (obj == target)
         {
@@ -62,4 +75,6 @@ public class SelectableUIItem : MonoBehaviour
         }
     }
 
+    private void SelectionToggleOn() => selectionToggle.isOn = true;
+    private void SelectionToggleOff() => selectionToggle.isOn = false;
 }

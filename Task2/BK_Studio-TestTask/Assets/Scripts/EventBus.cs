@@ -10,20 +10,32 @@ public class EventBus : IEventBus
     public event Action OnSelectedAll;
     public event Action OnDeselectedAll;
 
+    public event Action<bool> OnSetActive;
+
     public event Action<Color> OnColorChanged;
+
+
+    public void SetActive(bool value)
+    {
+        OnSetActive?.Invoke(value);
+    }
+
 
     public void Select(ISelectable obj)
     {
         OnSelected?.Invoke(obj);
     }
+
     public void Deselect(ISelectable obj)
     {
         OnDeselected?.Invoke(obj);
     }
+
     public void SelectAll()
     {
         OnSelectedAll?.Invoke();
     }
+
     public void DeselectAll()
     {
         OnDeselectedAll?.Invoke();

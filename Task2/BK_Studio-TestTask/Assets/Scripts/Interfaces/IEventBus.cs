@@ -10,7 +10,12 @@ public interface IEventBus
     public event Action OnSelectedAll;
     public event Action OnDeselectedAll;
 
+    public event Action<bool> OnSetActive;
+
     public event Action<Color> OnColorChanged;
+
+
+    public void SetActive(bool value);
 
     public void Select(ISelectable obj);
     public void Deselect(ISelectable obj);

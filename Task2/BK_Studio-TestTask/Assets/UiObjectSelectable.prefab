@@ -309,8 +309,8 @@ GameObject:
   - component: {fileID: 4198984358085004498}
   - component: {fileID: 534374864762025292}
   - component: {fileID: 2524351505307514494}
-  - component: {fileID: 7920529740859536238}
   - component: {fileID: 5854908335149707493}
+  - component: {fileID: 2510748126726449611}
   m_Layer: 5
   m_Name: UiObjectSelectable
   m_TagString: Untagged
@@ -377,21 +377,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7920529740859536238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4972385434706257319}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d66a52e3cf385da49be6edc1b10acbe5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectionToggle: {fileID: 8685561275354169209}
-  viewToggle: {fileID: 1063769046033596910}
-  label: {fileID: 6695952487652987061}
 --- !u!114 &5854908335149707493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -406,6 +391,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!114 &2510748126726449611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4972385434706257319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b84d66da878cbdb4a8700454f5e62f5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectionToggle: {fileID: 8685561275354169209}
+  viewToggle: {fileID: 1063769046033596910}
+  label: {fileID: 6695952487652987061}
 --- !u!1 &5433160349342575711
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,7 +16,7 @@ public class UIController : MonoBehaviour
         {
             var uiItem = Instantiate(selectableUIItem, scrollViewContent);
 
-            if (uiItem.TryGetComponent(out SelectableUIItem selectableItem))
+            if (uiItem.TryGetComponent(out SceneObjectUIItem selectableItem))
             {
                 selectableItem.Init(sceneObject, sceneObject.Name, seleñtManager, eventBus);
             }

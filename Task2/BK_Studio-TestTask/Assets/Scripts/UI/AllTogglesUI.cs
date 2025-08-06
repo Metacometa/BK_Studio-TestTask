@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.GraphicsBuffer;
 
 public class AllTogglesUI : MonoBehaviour
 {
@@ -21,6 +22,17 @@ public class AllTogglesUI : MonoBehaviour
         this.objectProvider = objectProvider;
 
         selectionToggle.onValueChanged.AddListener(OnSelectionToggled);
+        viewToggle.onValueChanged.AddListener(OnViewToggled);
+    }
+
+    private void OnViewToggled(bool value)
+    {
+        foreach (ISceneObject sceneObject in objectProvider.GetSceneObjects())
+        {
+            sceneObject.SetActive(value);
+        }
+
+        eventBus.SetActive(value);
     }
 
     private void OnSelectionToggled(bool selected)

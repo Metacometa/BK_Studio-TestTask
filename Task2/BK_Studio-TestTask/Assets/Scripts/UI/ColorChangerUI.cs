@@ -18,15 +18,22 @@ public class ColorChangerUI : MonoBehaviour
         gSlider.onValueChanged.AddListener(OnSliderChanged);
         bSlider.onValueChanged.AddListener(OnSliderChanged);
         aSlider.onValueChanged.AddListener(OnSliderChanged);
+
+        eventBus.OnSelected += SetColor;
+    }
+
+    private void SetColor(ISelectable _)
+    {
+        eventBus?.ChangeColor(GetColor());
     }
 
     private void OnSliderChanged(float val)
     {
-        float r = rSlider.value;
-        float g = gSlider.value;
-        float b = bSlider.value;
-        float a = aSlider.value;
+        eventBus?.ChangeColor(GetColor());
+    }
 
-        eventBus?.ChangeColor(new Color(r, g, b, a));
+    private Color GetColor()
+    {
+        return new Color(rSlider.value, gSlider.value, bSlider.value, aSlider.value);
     }
 }
