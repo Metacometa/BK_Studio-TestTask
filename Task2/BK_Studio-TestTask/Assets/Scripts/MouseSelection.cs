@@ -22,13 +22,11 @@ public class MouseSelection : MonoBehaviour, IMouseSelection
             if (hit.collider.TryGetComponent(out ISelectable obj))
             {
                 selectManager.Add(obj);
-                eventBus.MouseSelect(obj);
             }
         }
         else
         {
             selectManager.RemoveAll();
-            eventBus.MouseSelect(null);
         }
     }
 }

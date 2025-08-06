@@ -11,7 +11,6 @@ public class RendererController : MonoBehaviour, IRendererController
 
     public void SetColor(Color color)
     {
-        Debug.Log("RendereController");
         rend.material.color = color;
     }
 }

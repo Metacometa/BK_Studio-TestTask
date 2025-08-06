@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class ObjectManager : MonoBehaviour, ISceneObjectProvider
 {
-    public List<SceneObject> objects;
+    public List<ISceneObject> objects;
 
     public void Init()
     {
-        objects = new List<SceneObject>(FindObjectsOfType<SceneObject>());
+        objects = new List<ISceneObject>(FindObjectsOfType<SceneObject>());
     }
 
-    public List<SceneObject> GetSceneObjects()
+    public List<ISceneObject> GetSceneObjects()
     {
         return objects;
     }

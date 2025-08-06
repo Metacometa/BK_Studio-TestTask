@@ -2,5 +2,5 @@
 
 public interface ISceneObjectProvider
 {
-    public List<SceneObject> GetSceneObjects();
+    public List<ISceneObject> GetSceneObjects();
 }

@@ -24,7 +24,11 @@ public class SelectableUIItem : MonoBehaviour
 
         selectionToggle.onValueChanged.AddListener(OnSelectionToggled);
 
-        eventBus.OnMouseSelected += MouseSelectionHandler;
+        eventBus.OnSelected += ToggleOn;
+        eventBus.OnDeselected += ToggleOff;
+
+        eventBus.OnSelectedAll += ToggleOn;
+        eventBus.OnDeselectedAll += ToggleOff;
     }
 
     private void OnSelectionToggled(bool selected)
@@ -39,15 +43,22 @@ public class SelectableUIItem : MonoBehaviour
         }
     }
 
-    private void MouseSelectionHandler(ISelectable obj)
+    private void ToggleOn(ISelectable obj)
     {
-        if (obj == null)
-        {
-            selectionToggle.isOn = false;
-        }
-        else if (obj == target)
+        if (obj == target)
         {
             selectionToggle.isOn = true;
+        }
+    }
+
+    private void ToggleOn() => selectionToggle.isOn = true;
+    private void ToggleOff() => selectionToggle.isOn = false;
+
+    private void ToggleOff(ISelectable obj)
+    {
+        if (obj == target)
+        {
+            selectionToggle.isOn = false;
         }
     }
 

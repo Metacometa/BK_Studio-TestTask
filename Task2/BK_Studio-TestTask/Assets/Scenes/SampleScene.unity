@@ -960,7 +960,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61297ecda796bf84fb81068dc3a3f7ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objects: []
 --- !u!1 &479533417
 GameObject:
   m_ObjectHideFlags: 0
@@ -2348,6 +2347,7 @@ MonoBehaviour:
   scrollViewContent: {fileID: 310070742}
   selectableUIItem: {fileID: 4972385434706257319, guid: 79a693a8b3ba5a646b4bc33d6beb2dfb, type: 3}
   colorChangerUI: {fileID: 396263100}
+  allToggllesUI: {fileID: 1914675918}
 --- !u!1 &881476052
 GameObject:
   m_ObjectHideFlags: 0
@@ -4142,7 +4142,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_IsOn: 1
+  m_IsOn: 0
 --- !u!1 &1762829012
 GameObject:
   m_ObjectHideFlags: 0
@@ -4652,7 +4652,7 @@ GameObject:
   - component: {fileID: 1820355013}
   - component: {fileID: 1820355012}
   - component: {fileID: 1820355011}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4899,6 +4899,7 @@ GameObject:
   - component: {fileID: 1914675916}
   - component: {fileID: 1914675915}
   - component: {fileID: 1914675917}
+  - component: {fileID: 1914675918}
   m_Layer: 5
   m_Name: AllTogglePanel
   m_TagString: Untagged
@@ -4992,6 +4993,20 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1914675918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1914675912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad184c6ff771d274c90332ed1b59c112, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewToggle: {fileID: 1798292418}
+  selectionToggle: {fileID: 1740332094}
 --- !u!1 &1922812748
 GameObject:
   m_ObjectHideFlags: 0

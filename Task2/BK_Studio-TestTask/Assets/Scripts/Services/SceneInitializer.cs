@@ -18,7 +18,7 @@ public class SceneInitializer : MonoBehaviour
         EventBus eventBus = new EventBus();
 
         objectManager?.Init();
-        selectManager?.Init();
+        selectManager?.Init(eventBus);
 
         visualManager?.Init(selectManager, eventBus);
         inputManager?.Init(eventBus);
@@ -26,8 +26,8 @@ public class SceneInitializer : MonoBehaviour
         userController.Init(eventBus, selectManager);
 
 
-        List<SceneObject> sceneObjects = objectManager?.GetSceneObjects();
+        List<ISceneObject> sceneObjects = objectManager?.GetSceneObjects();
 
-        uIContoller?.Init(sceneObjects, selectManager, eventBus); 
+        uIContoller?.Init(sceneObjects, selectManager, eventBus, objectManager); 
     }
 }
