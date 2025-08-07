@@ -40,6 +40,7 @@ public class SceneObjectUIItem : MonoBehaviour
         if (selected)
         {
             seleñtManager.Add(target);
+            eventBus.SelectInUI(target);
         }
         else
         {

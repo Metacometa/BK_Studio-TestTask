@@ -8,6 +8,7 @@ public interface IEventBus
     public event Action<float> OnRightClicked;
 
     public event Action<ISelectable> OnSelected;
+    public event Action<ISelectable> OnSelectedInUI;
     public event Action<ISelectable> OnDeselected;
     public event Action OnSelectedAll;
     public event Action OnDeselectedAll;
@@ -27,6 +28,7 @@ public interface IEventBus
 
     public void SetActive(bool value);
 
+    public void SelectInUI(ISelectable obj);
     public void Select(ISelectable obj);
     public void Deselect(ISelectable obj);
     public void SelectAll();

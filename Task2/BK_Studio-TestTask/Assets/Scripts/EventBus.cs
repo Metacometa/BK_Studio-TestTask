@@ -8,6 +8,8 @@ public class EventBus : IEventBus
     public event Action<float> OnRightClicked;
 
     public event Action<ISelectable> OnSelected;
+    public event Action<ISelectable> OnSelectedInUI;
+
     public event Action<ISelectable> OnDeselected;
     public event Action OnSelectedAll;
     public event Action OnDeselectedAll;
@@ -48,6 +50,11 @@ public class EventBus : IEventBus
     public void Select(ISelectable obj)
     {
         OnSelected?.Invoke(obj);
+    }
+
+    public void SelectInUI(ISelectable obj)
+    {
+        OnSelectedInUI?.Invoke(obj);
     }
 
     public void Deselect(ISelectable obj)

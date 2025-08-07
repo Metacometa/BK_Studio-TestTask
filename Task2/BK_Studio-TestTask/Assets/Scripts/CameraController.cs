@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using static UnityEngine.GraphicsBuffer;
 
 public class CameraController : MonoBehaviour
@@ -23,7 +24,9 @@ public class CameraController : MonoBehaviour
 
         eventBus.OnZoomedCamera += ZoomCamera;
         eventBus.OnMovedCameraHorizontally += MoveCameraVertically;
+
         eventBus.OnDoubleClicked += FocusCamera;
+        eventBus.OnSelectedInUI += FocusCamera;
 
         eventBus.OnRightClicked += RotateAroundTarget;
 
@@ -47,13 +50,15 @@ public class CameraController : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, focusMask))
         {
-            float distance = Vector3.Distance(cam.transform.position, hit.transform.position);
+            FocusCameraLogic(hit.transform.position);
+        }
+    }
 
-            Vector3 offsetDir = (cam.transform.position - hit.transform.position).normalized;
-
-            cam.transform.position = hit.transform.position - cam.transform.forward * focusOffset;
-
-            target = hit.transform.position;
+    private void FocusCamera(ISelectable selectable)
+    {
+        if (selectable is MonoBehaviour sceneObj)
+        {
+            FocusCameraLogic(sceneObj.transform.position);
         }
     }
 
@@ -76,5 +81,14 @@ public class CameraController : MonoBehaviour
     private void ResetTarget()
     {
         target = cam.transform.position;
+    }
+
+    private void FocusCameraLogic(Vector3 position)
+    {
+        Vector3 offsetDir = (cam.transform.position - position).normalized;
+
+        cam.transform.position = position - cam.transform.forward * focusOffset;
+
+        target = position;
     }
 }
