@@ -64,7 +64,7 @@ public class SceneObjectUIItem : MonoBehaviour
     {
         if (obj == target)
         {
-            selectionToggle.isOn = true;
+            SelectionToggleOn();
         }
     }
 
@@ -72,10 +72,21 @@ public class SceneObjectUIItem : MonoBehaviour
     {
         if (obj == target)
         {
-            selectionToggle.isOn = false;
+            SelectionToggleOff();
         }
     }
 
-    private void SelectionToggleOn() => selectionToggle.isOn = true;
-    private void SelectionToggleOff() => selectionToggle.isOn = false;
+    private void SelectionToggleOn()
+    {
+        selectionToggle.onValueChanged.RemoveListener(OnSelectionToggled);
+        selectionToggle.isOn = true;
+        selectionToggle.onValueChanged.AddListener(OnSelectionToggled);
+    }
+    
+    private void SelectionToggleOff()
+    {
+        selectionToggle.onValueChanged.RemoveListener(OnSelectionToggled);
+        selectionToggle.isOn = false;
+        selectionToggle.onValueChanged.AddListener(OnSelectionToggled);
+    }
 }

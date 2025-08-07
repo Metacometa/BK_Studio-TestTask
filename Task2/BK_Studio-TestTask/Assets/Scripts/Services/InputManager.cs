@@ -29,6 +29,10 @@ public class InputManager : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
+            //Если клип был по UI, то ничего не делать
+            if (EventSystem.current.IsPointerOverGameObject())
+                return;
+
             DoubleClickLogic(mousePos);
         }
 
