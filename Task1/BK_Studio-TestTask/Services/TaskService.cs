@@ -65,6 +65,13 @@ public class TaskService : ITaskService
         Task task = taskRepository.GetByName(name);
         User user = userRepository.GetByUsername(executor);
 
+        if (user.Role != Role.Employee)
+        {
+            userContext.Notification = new Notification(NotificationType.Warning,
+                $"[УСПЕШНО]: Нельзя назначить задачу на пользователя с ролью \"{user.Role.ToString()}\"");
+            return;
+        }
+
         task.AddExecutor(user.Login);
         taskRepository.UpdateTask(task);
 
